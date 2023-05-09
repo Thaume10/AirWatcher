@@ -1,6 +1,6 @@
 //
 // Created by Léo Aimonetto on 09/05/2023.
-// TODO à inclure dans le Sensor
+// TODO - à inclure dans le Sensor
 
 #include "SensorAnalyzer.h"
 #include "Date.h"
@@ -17,11 +17,13 @@ bool analyzeSensor(const Sensor& sensor, const Date& start_date) {
     Date today = chrono::system_clock::now();
     Date end_date = start_date+timeRange;
 
+    vector<Measure> measures_sensor = get_measures_of_sensor(sensor.get_id(), start_date, end_date);
+
     if ((start_date+timeRange) > today)) {
         throw invalid_argument("La période de test doit commencer au moins 30 jours avant aujourd'hui");
     } else {
-        for (const auto& measurement : measurements) { //TODO A revoir
-            if (measurement.sensorID == sensorID && isnan(measurement.value)) {
+        for (auto& m : measures_sensor) {
+            if (m.value == null || m.value <= 0) {
                 reliable = false;
                 break;
             }
@@ -30,8 +32,10 @@ bool analyzeSensor(const Sensor& sensor, const Date& start_date) {
         vector<double> mean_surroundings = calculateMeanSurroundings(sensor->GPS, start_date, end_date);
         vector<double> mean_sensor = calculateMean(sensor, start_date, end_date);
 
-        if (abs(mean_surroundings - mean_sensor) > deltaOfReliability) { //TODO Comparer les différentes composantes du vecteur
-            reliable = false;
+        for(int c=0; c<4; c++) {
+            if (abs(mean_surroundings[0] - mean_sensor[0]) > deltaOfReliability) {
+                reliable = false;
+            }
         }
     }
 
