@@ -1,0 +1,103 @@
+//
+// Created by Léo Aimonetto on 09/05/2023.
+// TODO à inclure dans le Sensor
+
+#include "SensorAnalyzer.h"
+#include "Date.h"
+#include <cmath>
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+
+bool analyzeSensor(const Sensor& sensor, const Date& start_date) {
+    bool reliable = true;
+    int timeRange = 30; // days
+    double deltaOfReliability = 10;
+    Date today = chrono::system_clock::now();
+    Date end_date = start_date+timeRange;
+
+    if ((start_date+timeRange) > today)) {
+        throw invalid_argument("La période de test doit commencer au moins 30 jours avant aujourd'hui");
+    } else {
+        for (const auto& measurement : measurements) { //TODO A revoir
+            if (measurement.sensorID == sensorID && isnan(measurement.value)) {
+                reliable = false;
+                break;
+            }
+        }
+
+        vector<double> mean_surroundings = calculateMeanSurroundings(sensor->GPS, start_date, end_date);
+        vector<double> mean_sensor = calculateMean(sensor, start_date, end_date);
+
+        if (abs(mean_surroundings - mean_sensor) > deltaOfReliability) { //TODO Comparer les différentes composantes du vecteur
+            reliable = false;
+        }
+    }
+
+    return reliable;
+}
+
+vector<double> calculateMeanSurroundings(GPS coord, Date start_date, Date end_date) {
+    vector<pair<Sensor,double>> five_nearest_with_double = get_five_nearest_sensors(coo);
+    vector<Sensor> = five_nearest
+
+    for (auto& p : five_nearest_with_double) {
+        five_nearest.push_back(p.first);
+    }
+
+    vector<double> mean;
+
+    for(auto& s : five_nearest) {
+        vector<double> result = calculateMean(s, start_date, end_date);
+        for (int i = 0; i < result.size(); i++) {
+            mean[i] += result[i];
+        }
+    }
+
+    for (int i = 0; i < mean.size(); i++) {
+        mean[i] /= 5;
+    }
+
+    return mean;
+}
+
+vector<double> calculateMean(Sensor sensor, const Date start_date, const Date end_date) {
+    vector<Measure> measures = get_measures_of_sensor(sensor.get_id(), start_date, end_date);
+    vector<double> mean;
+
+    int count_O3 = 0
+    int count_NO2 = 0
+    int count_SO2 = 0
+    int count_PM10 = 0
+
+    for(auto& m : measures){
+        switch (m->attribute.get_id()) {
+            case "O3":
+                mean[0] += m.value;
+                count_O3++;
+                break;
+            case "NO2":
+                mean[1] += m.value;
+                count_NO2++;
+                break;
+            case "SO2":
+                mean[2] += m.value;
+                count_SO2++;
+                break;
+            case "PM10":
+                mean[3] += m.value;
+                count_PM10++;
+                break;
+            default:
+                break;
+        }
+    }
+
+    mean[0] /= count_O3;
+    mean[1] /= count_NO2;
+    mean[2] /= count_SO2;
+    mean[3] /= count_PM10;
+
+    return mean;
+}
