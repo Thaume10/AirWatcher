@@ -10,7 +10,11 @@ class User : public Person{
 public:
   User();
 
+  User(std::string id, int points = 0, bool is_trustworthy = true);
+
   User(std::string login, std::string password, std::string id, int points = 0, bool is_trustworthy = true);
+
+  void add_sensor(Sensor sensor);
 
 protected:
   std::string id;

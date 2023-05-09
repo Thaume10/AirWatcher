@@ -9,7 +9,9 @@ class Sensor{
 public:
   Sensor();
 
-  Sensor(bool is_malfunctionning); //Au cas où un user pas trustworthy créee un sensor
+  Sensor(std::string id);
+
+  Sensor(std::string id, bool is_malfunctionning); //Au cas où un user pas trustworthy créee un sensor
 
   std::map<Sensor, double> scoring_similar_sensors();
 

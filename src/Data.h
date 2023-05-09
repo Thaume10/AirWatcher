@@ -20,7 +20,7 @@ class Data{
 public:
   Data();
 
-  void Load_CSV(std::string filename);
+  void Load_CSV();
 
   std::vector<Measurement> retrieve_data_around_aircleaner(std::string id, Date start, Date end);
 
