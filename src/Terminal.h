@@ -3,8 +3,9 @@
 
 class Terminal{
 public:
-  void Menu();
+  Terminal();
 
+  void Menu();
 
 protected:
 };

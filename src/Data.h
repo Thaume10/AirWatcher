@@ -13,10 +13,13 @@
 #include "Cleaner.h"
 #include "Date.h"
 #include "GPS.h"
+#include "Attribute.h"
 
 
 class Data{
 public:
+  Data();
+
   void Load_CSV(std::string filename);
 
   std::vector<Measurement> retrieve_data_around_aircleaner(std::string id, Date start, Date end);

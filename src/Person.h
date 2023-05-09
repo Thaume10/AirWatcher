@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <string>
+#include "Date.h"
+#include "GPS.h"
 
 
 class Person{
 public:
+  
   bool Log_in(std::string login, std::string password);
 
   bool Log_in_2fa(std::string login, std::string password);
@@ -20,6 +23,10 @@ public:
   std::vector<int> Stats_precise_position(GPS position, Date start, Date end);
 
 protected:
+  Person();
+
+  Person(std::string login, std::string password);
+
   std::string login;
   
   std::string password;
