@@ -8,7 +8,7 @@ public:
 protected:
   std::string id;
   int points;
-  bool is_trust
+  bool is_trust;
 
 };
 #endif

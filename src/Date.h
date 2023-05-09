@@ -10,7 +10,7 @@ protected:
 
 public:
     Date();
-    std::string Time_to_string();
+    std::string To_string();
     std::time_t String_to_time(std::string time);
 };
 #endif
