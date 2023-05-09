@@ -1,6 +1,8 @@
 #if !defined(GOVERNMENTMEMBER_H)
 #define GOVERNMENTMEMBER_H
 
+#include "Person.h"
+
 
 class GovernmentMember : public Person {
 public:
