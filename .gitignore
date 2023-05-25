@@ -35,11 +35,4 @@
 .clang-tidy
 core
 vgcore*
-analog
-build/
-framework_test/bin/
-*.dot
-*.png
-anonyme.log
-court.log
-
+airwatcher
