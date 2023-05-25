@@ -1,11 +1,11 @@
 SRCDIR = ./src
 BUILDDIR = ./build
-EXE = analog
+EXE = airwatcher
 SRC = $(shell find $(SRCDIR) -name *.cpp)
 OBJ = ${SRC:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o}
 CC = g++
 CFLAGS = -ansi -pedantic -Wall -std=c++11
-MAPFLAGS = -DMAP -g
+DEBUGFLAGS = -DDEBUG -g
 LDFLAGS = 
 RM = rm
 MAKE = make
@@ -24,9 +24,9 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp $(DEPDIR)/%.d | $(DEPDIR)
 	@$(MKDIR) -p $(dir $@)
 	$(CC) $(DEPFLAGS) -o $@ -c $< $(CFLAGS)
 
-MAP:
+DEBUG:
 	$(MAKE) clean
-	$(MAKE) CFLAGS='$(CFLAGS) $(MAPFLAGS)'
+	$(MAKE) CFLAGS='$(CFLAGS) $(DEBUGFLAGS)'
 
 format:
 	$(CLANGFORMAT) -i $(SRCDIR)/*.cpp $(SRCDIR)/*.h 

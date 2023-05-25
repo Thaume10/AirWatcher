@@ -5,7 +5,7 @@
 #include "GPS.h"
 
 class Device {
-protected:
+public:
     std::string id;
     GPS coord;
 };

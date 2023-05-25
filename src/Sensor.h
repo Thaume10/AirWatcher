@@ -4,8 +4,9 @@
 #include <map>
 #include <vector>
 #include "Measurement.h"
+#include "Device.h"
 
-class Sensor{
+class Sensor : public Device{
 public:
   Sensor();
 

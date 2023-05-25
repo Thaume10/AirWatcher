@@ -15,6 +15,7 @@ void Data::Load_CSV(){
   while(fichier){
     getline(fichier, user_id, ';');
     getline(fichier, sensor_id, ';');
+    fichier >> ws;
     User user(user_id);
     Sensor sensor(sensor_id);
     cout << user_id << endl;

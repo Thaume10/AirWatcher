@@ -16,7 +16,7 @@ public:
 
   void Log_out();
 
-  virtual bool Sign_up(std::string login, std::string password);
+  virtual bool Sign_up(std::string login, std::string password) = 0;
   
   std::vector<int> Stats_circular_area(GPS position, double radius, Date start, Date end);
 
