@@ -3,9 +3,15 @@
 
 #include <vector>
 #include <string>
+#include <utility> 
+#include <iostream>
 #include "Date.h"
+#include "Data.h"
 #include "GPS.h"
+#include "Sensor.h"
+#include "Measurement.h"
 
+using namespace std;
 
 class Person{
 public:
@@ -18,9 +24,9 @@ public:
 
   virtual bool Sign_up(std::string login, std::string password) = 0;
   
-  std::vector<int> Stats_circular_area(GPS position, double radius, Date start, Date end);
+  std::vector<double> Stats_circular_area(GPS position, double radius, Date start, Date end);
 
-  std::vector<int> Stats_precise_position(GPS position, Date start, Date end);
+  std::vector<double> Stats_precise_position(GPS position, Date start, Date end);
 
 protected:
   Person();

@@ -9,9 +9,17 @@ public:
 
   Measurement(double value, Date timestamp);
 
-  double get_value();
+  
 
-  Date get_timestamp();
+  inline double get_value() const {
+        return value;
+    }
+
+    inline Date get_timestamp() const {
+        return timestamp;
+    }
+
+  
 
 protected:
   double value;
