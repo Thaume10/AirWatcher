@@ -10,8 +10,6 @@
 #include "Sensor.h"
 #include "Measurement.h"
 
-using namespace std;
-
 class Person{
 public:
   
