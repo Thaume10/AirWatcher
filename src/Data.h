@@ -4,16 +4,19 @@
 #include <fstream>
 #include <vector>
 #include <utility>
-#include "User.h"
+#include <string>
+#include <algorithm>
+#include <cmath>
 #include "Provider.h"
-#include "GovernmentMember.h"
 #include "Measurement.h"
-#include "Admin.h"
 #include "Sensor.h"
 #include "Cleaner.h"
 #include "Date.h"
 #include "GPS.h"
+#include "User.h"
 #include "Attribute.h"
+#include "GovernmentMember.h"
+#include "Admin.h"
 
 
 class Data{
@@ -24,13 +27,18 @@ public:
 
   std::vector<Measurement> retrieve_data_around_aircleaner(std::string id, Date start, Date end);
 
-  std::vector<std::pair<Sensor, int>> get_five_nearest_sensors(GPS coord);
+  std::vector<std::pair<Sensor, double>> get_five_nearest_sensors(GPS coord);
 
   std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end);
 
   std::vector<std::string> get_aircleaner_impact(std::string cleaner_id);
 
   std::vector<User>& getUsers();
+
+  double calculerDistance(GPS coord1, GPS coord2);
+
+
+  Sensor getSensorById(std::string sensorId);
 
 protected:
   std::vector<User> users;
