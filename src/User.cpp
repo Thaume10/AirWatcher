@@ -15,3 +15,11 @@ bool User::Sign_up(std::string login, std::string password) {
 void User::add_sensor(Sensor sensor) {
     sensors.push_back(sensor);
 }
+
+std::string& User::getId(){
+  return id;
+}
+
+std::vector<Sensor>& User::getSensors(){
+  return sensors;
+}

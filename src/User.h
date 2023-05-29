@@ -15,7 +15,12 @@ public:
   User(std::string login, std::string password, std::string id, int points = 0, bool is_trustworthy = true);
 
   void add_sensor(Sensor sensor);
+
   virtual bool Sign_up(std::string login, std::string password);
+  
+  std::string& getId();
+  
+  std::vector<Sensor>& getSensors();
 
 protected:
   std::string id;

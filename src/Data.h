@@ -1,5 +1,5 @@
 #if ! defined ( DATA_H )
-#define LECTURE_H
+#define DATA_H
 
 #include <fstream>
 #include <vector>
@@ -29,6 +29,8 @@ public:
   std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end);
 
   std::vector<std::string> get_aircleaner_impact(std::string cleaner_id);
+
+  std::vector<User>& getUsers();
 
 protected:
   std::vector<User> users;
