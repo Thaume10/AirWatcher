@@ -11,7 +11,7 @@ protected:
 public:
     Date();
     std::string To_string();
-    std::time_t String_to_time(std::string time);
+    void String_to_time(std::string time);
 
     bool operator<(const Date& other) const {
         return time < other.time;
@@ -21,5 +21,7 @@ public:
     bool operator>(const Date& other) const {
         return time > other.time;
     }
+
+    void add_days(int d);
 };
 #endif
