@@ -12,11 +12,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="183b44fd-8d3a-43b3-8e2e-a7ef45a8f750" name="Changes" comment="Lab 4 - 30/05/23&#10;#1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sensor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sensor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SensorAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/SensorAnalyzer.h" afterDir="false" />
+    <list default="true" id="183b44fd-8d3a-43b3-8e2e-a7ef45a8f750" name="Changes" comment="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683626025708</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <created>1685430417586</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685430417586</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <created>1685430457062</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685430457062</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +127,7 @@
     <MESSAGE value="Lab 3 - 09/05/23" />
     <MESSAGE value="Lab 3 - 09/05/23&#10;2" />
     <MESSAGE value="Lab 4 - 30/05/23&#10;#1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab 4 - 30/05/23&#10;#1" />
+    <MESSAGE value="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor" />
   </component>
 </project>
