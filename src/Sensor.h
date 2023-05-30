@@ -22,7 +22,9 @@ public:
         return is_malfunctionning;
     }
 
-  std::vector<Measurement> get_measurements();
+  inline std::vector<Measurement> get_measurements() const {
+        return measurements;
+    }
 
   void set_is_malfunctionning(bool malfunctionning);
 

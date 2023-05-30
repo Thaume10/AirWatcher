@@ -2,6 +2,7 @@
 #define MEASUREMENT_H
 
 #include "Date.h"
+#include "Attribute.h"
 
 class Measurement{
 public:
@@ -19,10 +20,14 @@ public:
         return timestamp;
     }
 
+    inline Attribute get_attribute() const {
+        return attibute;
+    }
   
 
 protected:
   double value;
   Date timestamp;
+  Attribute attibute;
 };
 #endif
