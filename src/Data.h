@@ -37,6 +37,8 @@ public:
 
   double calculerDistance(GPS coord1, GPS coord2);
 
+  static bool comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) ;
+
 
   Sensor getSensorById(std::string sensorId);
 

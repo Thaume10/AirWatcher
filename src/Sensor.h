@@ -16,7 +16,11 @@ public:
 
   std::map<Sensor, double> scoring_similar_sensors();
 
-  bool get_is_malfunctionning();
+  
+
+  inline bool get_is_malfunctionning() const {
+        return is_malfunctionning;
+    }
 
   std::vector<Measurement> get_measurements();
 
