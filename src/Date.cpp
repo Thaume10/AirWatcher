@@ -1,4 +1,5 @@
 #include "Date.h"
+#include <ctime>
 #include <sstream>
 using namespace std;
 
@@ -15,3 +16,9 @@ std::string Date::To_string() {
     return oss.str();
 }
 
+void Date::String_to_time(std::string time) {
+    tm dt;
+    get_time(&dt, "%Y-%m-%d %H:%M:%S");
+    time = mktime(&dt);
+    return ;
+}
