@@ -91,6 +91,7 @@ bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
 //     int count_SO2 = 0
 //     int count_PM10 = 0
 //
+
 //     for(auto& m : measures){
 //         switch (m->attribute.get_id()) {
 //             case "O3":
@@ -114,6 +115,7 @@ bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
 //         }
 //     }
 //
+
 //     mean[0] /= count_O3;
 //     mean[1] /= count_NO2;
 //     mean[2] /= count_SO2;
