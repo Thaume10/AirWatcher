@@ -2,14 +2,22 @@
 #include "Sensor.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include <set>
 
 using namespace std;
+
+vector<User> Data::users;
 
 Data::Data(){
 }
 
 void Data::Load_CSV(){
   //Users
+  //
+  std::set<User> userSet;
+  std::set<Sensor> sensorSet;
+
   ifstream fichier("data/users.csv");
   string user_id;
   string sensor_id;
@@ -20,13 +28,15 @@ void Data::Load_CSV(){
     User user(user_id);
     Sensor sensor(sensor_id);
     user.add_sensor(sensor);
-    users.push_back(user);
-    sensors.push_back(sensor);
+    userSet.insert(user);
+    sensorSet.insert(sensor);
   }
+  users.resize(userSet.size());
+  std::copy(userSet.begin(), userSet.end(), users.begin());
 }
 
 vector<User>& Data::getUsers(){
-  return users;
+  return Data::users;
 }
 
 //  bool comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {

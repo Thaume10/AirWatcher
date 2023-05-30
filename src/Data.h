@@ -23,31 +23,30 @@ class Data{
 public:
   Data();
 
-  void Load_CSV();
+  static void Load_CSV();
 
-  std::vector<Measurement> retrieve_data_around_aircleaner(std::string id, Date start, Date end);
+  static std::vector<Measurement> retrieve_data_around_aircleaner(std::string id, Date start, Date end);
 
-  std::vector<std::pair<Sensor, double>> get_five_nearest_sensors(GPS coord);
+  static std::vector<std::pair<Sensor, double>> get_five_nearest_sensors(GPS coord);
 
-  std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end);
+  static std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end);
 
-  std::vector<std::string> get_aircleaner_impact(std::string cleaner_id);
+  static std::vector<std::string> get_aircleaner_impact(std::string cleaner_id);
 
-  std::vector<User>& getUsers();
+  static std::vector<User>& getUsers();
 
-  double calculerDistance(GPS coord1, GPS coord2);
+  static double calculerDistance(GPS coord1, GPS coord2);
 
-
-  Sensor getSensorById(std::string sensorId);
+  static Sensor getSensorById(std::string sensorId);
 
 protected:
-  std::vector<User> users;
-  std::vector<Provider> providers;
-  std::vector<GovernmentMember> government_members;
-  std::vector<Admin> admins;
-  std::vector<Measurement> measurements;
-  std::vector<Sensor> sensors;
-  std::vector<Cleaner> cleaners;
-  std::vector<Attribute> attributes;
+  static std::vector<User> users;
+  static std::vector<Provider> providers;
+  static std::vector<GovernmentMember> government_members;
+  static std::vector<Admin> admins;
+  static std::vector<Measurement> measurements;
+  static std::vector<Sensor> sensors;
+  static std::vector<Cleaner> cleaners;
+  static std::vector<Attribute> attributes;
 };
 #endif

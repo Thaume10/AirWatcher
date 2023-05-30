@@ -23,9 +23,14 @@ public:
   void set_is_malfunctionning(bool malfunctionning);
 
   void add_measurement(Measurement measurement);
+
+  friend bool operator < (const Sensor & unSensor, const Sensor & autreSensor);
   
 protected:
   bool is_malfunctionning;
   std::vector<Measurement> measurements;
 };
+
+bool operator < (const Sensor & unSensor, const Sensor & autreSensor);
+
 #endif

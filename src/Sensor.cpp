@@ -9,3 +9,7 @@ Sensor::Sensor(string id) {
 Sensor::Sensor(string id, bool is_malfunctionning) : is_malfunctionning(is_malfunctionning) {
     this->id = id;
 }
+
+bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
+  return unSensor.get_id() < autreSensor.get_id();
+}
