@@ -9,6 +9,7 @@ using namespace std;
 
 vector<User> Data::users;
 vector<Sensor> Data::sensors;
+vector<Cleaner> Data::cleaners;
 
 Data::Data(){
 }

@@ -15,5 +15,7 @@ public:
     Cleaner(std::string id);
     void set_timestamp_start(Date date);
     void set_timestamp_stop(Date date);
+    Date get_timestamp_start();
+    Date get_timestamp_stop();
 };
 #endif

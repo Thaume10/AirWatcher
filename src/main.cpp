@@ -24,7 +24,7 @@ int main(){
   cout << "----------------CLEANERS--------------" << endl;
   vector<Cleaner> cleaners = Data::getCleaners();
   for(vector<Cleaner>::iterator itCleaners = cleaners.begin(); itCleaners !=cleaners.end(); ++itCleaners){
-    cout << "Cleaner : " << itCleaners->get_id() << " coord : " << itCleaners->get_coord().get_latitude() << " : " << itCleaners->get_coord().get_longitude() << " Date : " << itCleaners->To_string() << endl;
+    cout << "Cleaner : " << itCleaners->get_id() << " coord : " << itCleaners->get_coord().get_latitude() << " : " << itCleaners->get_coord().get_longitude() << " Debut : " << itCleaners->get_timestamp_start().To_string() <<  " Fin : " << itCleaners->get_timestamp_stop().To_string() << endl;
   }
   return 0;
 }
