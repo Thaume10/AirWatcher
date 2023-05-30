@@ -39,6 +39,8 @@ public:
 
   static Sensor getSensorById(std::string sensorId);
 
+  static bool comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) ;
+
 protected:
   static std::vector<User> users;
   static std::vector<Provider> providers;

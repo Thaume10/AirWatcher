@@ -39,36 +39,36 @@ vector<User>& Data::getUsers(){
   return Data::users;
 }
 
-//  bool comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {
-//     return paire1.second > paire2.second;
-// }
+  bool Data::comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {
+    return paire1.second > paire2.second;
+}
+
+vector<pair<Sensor, double>> Data::get_five_nearest_sensors(GPS coord){
+    vector<pair<Sensor, double>> top5;
+    vector<Sensor>::iterator itDebut = sensors.begin();
+    vector<Sensor>::iterator itFin = sensors.end();
+    for (auto it = itDebut; it != itFin; ++it) {
+        if(top5.size()<5){
+            if(it->get_is_malfunctionning()==false){
+                 top5.push_back(std::make_pair (*it,calculerDistance(coord,it->get_coord()) ));
+            }
+        }else{
+            sort(top5.begin(), top5.end(), comparerParDouble);
+            if(it->get_is_malfunctionning()==false && top5[0].second > calculerDistance(coord,it->get_coord())){
+                top5.push_back(std::make_pair (*it,calculerDistance(coord,it->get_coord()) ));
+            }
+        }
+        
+    }
+    return top5;
+}
 //
-// vector<pair<Sensor, double>> get_five_nearest_sensors(GPS coord){
-//     vector<pair<Sensor, double>> top5;
-//     vector<Sensor>::iterator itDebut = sensors.begin();
-//     vector<Sensor>::iterator itFin = sensors.end();
-//     for (auto it = itDebut; it != itFin; ++it) {
-//         if(top5.size()<5){
-//             if(it->get_is_malfunctionning()==false){
-//                  top5.push_back(*it);
-//             }
-//         }else{
-//             sort(top5.begin(), top5.end(), comparerParDouble);
-//             if(it->get_is_malfunctionning()==false && top5[0].second > calculerDistance(coord,it->get_coord)){
-//                 top5.push_back(*it);
-//             }
-//         }
-//         
-//     }
-//     return top5;
-// }
-//
-//  double calculerDistance(GPS coord1, GPS coord2) {
-//     double deltaX = coord2.get_latitude() - coord1.get_latitude();
-//     double deltaY = coord2.get_longitude() - coord1.get_longitude();
-//     double distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
-//     return distance;
-// }
+ double Data::calculerDistance(GPS coord1, GPS coord2) {
+    double deltaX = coord2.get_latitude() - coord1.get_latitude();
+    double deltaY = coord2.get_longitude() - coord1.get_longitude();
+    double distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+    return distance;
+}
 //
 //
 // vector<Measurement> get_measures_of_sensor(string sensorId,  Date start, Date end){
