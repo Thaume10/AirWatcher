@@ -16,7 +16,7 @@ public:
 
   void add_sensor(Sensor sensor);
 
-  virtual bool Sign_up(std::string login, std::string password);
+  // virtual bool Sign_up(std::string login, std::string password);
   
   std::string getId()const;
   
