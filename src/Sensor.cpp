@@ -25,6 +25,10 @@ bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
   return unSensor.get_id() < autreSensor.get_id();
 }
 
+
+
+
+
 vector<double> Sensor::calculateMean(const Sensor& sensor, const Date start_date, const Date end_date) {
     vector<Measurement> measures = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date);
     vector<double> mean;

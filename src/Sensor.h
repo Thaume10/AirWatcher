@@ -4,7 +4,6 @@
 #include <map>
 #include <vector>
 #include <utility>
-#include "Measurement.h"
 #include "Device.h"
 #include "Date.h"
 #include <cmath>
@@ -27,23 +26,22 @@ public:
         return is_malfunctionning;
     }
 
-    inline std::vector<Measurement> get_measurements() const {
-        return measurements;
-    }
+   
 
     void set_is_malfunctionning(bool malfunctionning);
 
-    void add_measurement(Measurement measurement);
+    //void add_measurement(Measurement measurement);
 
     friend bool operator < (const Sensor & unSensor, const Sensor & autreSensor);
 
     bool analyzeSensor(const Sensor& sensor, const Date& start_date);
+    
 
 protected:
     bool is_malfunctionning;
-    std::vector<Measurement> measurements;
     std::vector<double> calculateMean(const Sensor& sensor, const Date start_date, const Date end_date);
     std::vector<double> calculateMeanSurroundings(GPS coord, Date start_date, Date end_date);
+    
 };
 
 bool operator < (const Sensor & unSensor, const Sensor & autreSensor);

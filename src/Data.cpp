@@ -57,9 +57,10 @@ void Data::Load_CSV(){
     fichier >> ws;
     Date date;
     date.String_to_time(datestr);
-    Measurement m(val, date);
+    Measurement m(val, date,sensorid);
     m.get_attribute().set_id(attribute_id);
     measurements.push_back(m);
+    
   } 
   fichier.close();
 
@@ -161,11 +162,14 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(GPS coord){
         }else{
             sort(top5.begin(), top5.end(), comparerParDouble);
             if(it->get_is_malfunctionning()==false && top5[0].second > calculerDistance(coord,it->get_coord())){
+              top5.erase(top5.begin());
                 top5.push_back(std::make_pair (*it,calculerDistance(coord,it->get_coord()) ));
             }
         }
         
     }
+    sort(top5.begin(), top5.end(), comparerParDouble);
+
     return top5;
 }
 //
@@ -176,16 +180,30 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(GPS coord){
     return distance;
 }
 
+vector<Measurement> Data::get_measurementsSensor(string sensorId){
+        vector<Measurement> list;
+        for (  Measurement&  element : getMeasurements()) {
+            if(element.get_sensor().get_id()==sensorId){
+                list.push_back(element);
+            }
+            
+        }
+        return list;
+}
+
 
 vector<Measurement> Data::get_measures_of_sensor(string sensorId,  Date start, Date end){
     vector<Measurement> result;
-    Sensor sensor = getSensorById(sensorId);
-    vector<Measurement>::iterator itDebut = sensor.get_measurements().begin();
-    vector<Measurement>::iterator itFin = sensor.get_measurements().end();
+    vector<Measurement> list = get_measurementsSensor(sensorId);
+    vector<Measurement>::iterator itDebut = list.begin();
+    vector<Measurement>::iterator itFin = list.end();
     for (auto it = itDebut; it != itFin; ++it) {
-        if(it->get_timestamp() < end && it->get_timestamp()>start){
+        if(end>it->get_timestamp()  && it->get_timestamp()>start){
             result.push_back(*it);
         }
+    }
+    if(result.empty()){
+      //A remplir
     }
     return result;
 }
