@@ -5,15 +5,17 @@
 #include "GPS.h"
 
 class Device {
-public:
-    std::string id;
-    GPS coord;
-
+  public:
     inline GPS get_coord() const {
         return coord;
     }
     inline std::string get_id() const {
         return id;
     }
+
+  protected:
+    std::string id;
+    GPS coord;
+
 };
 #endif
