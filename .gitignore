@@ -37,5 +37,5 @@ core
 vgcore*
 airwatcher
 .idea
-.idea/*
-.idea/workspace.xml
+.idea/
+/.idea

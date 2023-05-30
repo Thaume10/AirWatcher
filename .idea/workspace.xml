@@ -14,6 +14,7 @@
   <component name="ChangeListManager">
     <list default="true" id="183b44fd-8d3a-43b3-8e2e-a7ef45a8f750" name="Changes" comment="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +32,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="143cb61d-006f-4e9e-b7da-a20fd3f5fc04" />
+        <option name="url" value="https://github.com/thmboyer/AirWatcher.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MakefileLocalSettings">
     <option name="projectSyncType">
@@ -116,7 +130,28 @@
       <option name="project" value="LOCAL" />
       <updated>1685430457062</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <created>1685430528265</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685430528265</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <created>1685430579102</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685430579102</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Lab 4 - 30/05/23&#10;#2&#10;Merge SensorAnalyzer in Sensor">
+      <created>1685430603964</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685430603964</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
