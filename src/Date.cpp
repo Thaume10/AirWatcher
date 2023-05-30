@@ -12,7 +12,7 @@ Date::Date() {
 
 std::string Date::To_string() {
     ostringstream oss;
-    oss << std::put_time(std::localtime(&time), "%d-%m-%Y %H-%M-%S");
+    oss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
 
