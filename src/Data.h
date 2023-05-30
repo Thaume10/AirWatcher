@@ -37,6 +37,8 @@ public:
 
   static std::vector<Sensor>& getSensors();
 
+  static std::vector<Cleaner>& getCleaners();
+
   static double calculerDistance(GPS coord1, GPS coord2);
 
   static Sensor getSensorById(std::string sensorId);

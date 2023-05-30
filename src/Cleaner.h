@@ -12,5 +12,8 @@ protected:
 
 public:
     std::vector<std::string> get_impact();
+    Cleaner(std::string id);
+    void set_timestamp_start(Date date);
+    void set_timestamp_stop(Date date);
 };
 #endif

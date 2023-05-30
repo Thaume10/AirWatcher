@@ -72,6 +72,35 @@ void Data::Load_CSV(){
   }
   fichier.close();
 
+  //Cleaners
+  fichier.open("data/cleaners.csv");
+  string cleaner_id;
+  string debut;
+  string fin;
+  while(!fichier.eof()){
+    getline(fichier, cleaner_id, ';');
+    fichier >> latitude;
+    getline(fichier, temp, ';');
+    fichier >> longitude;
+    getline(fichier, temp, ';');
+    getline(fichier, debut, ';');
+    getline(fichier, fin, ';');
+    fichier >> ws;
+
+    Cleaner cleaner(cleaner_id);
+    Date dateDebut;
+    Date dateFin;
+    dateDebut.String_to_time(debut);
+    dateFin.String_to_time(fin);
+    GPS pos(latitude, longitude);
+
+    cleaner.set_timestamp_start(dateDebut);
+    cleaner.set_timestamp_stop(dateFin);
+    cleaner.set_coord(pos);
+    cleaners.push_back(cleaner);
+  }
+  fichier.close();
+
   users.resize(userSet.size());
   std::copy(userSet.begin(), userSet.end(), users.begin());
 }
@@ -82,6 +111,10 @@ vector<User>& Data::getUsers(){
 
 vector<Sensor>& Data::getSensors(){
   return Data::sensors;
+}
+
+vector<Cleaner>& Data::getCleaners(){
+  return Data::cleaners;
 }
 
   bool Data::comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {

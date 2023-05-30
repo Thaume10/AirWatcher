@@ -14,9 +14,9 @@ class Device {
     inline std::string get_id() const {
         return id;
     }
-  inline void set_coord(GPS pos){
-    coord = pos;
-  }
+   inline void set_coord(GPS pos){
+      coord = pos;
+   }
 
   protected:
     std::string id;
