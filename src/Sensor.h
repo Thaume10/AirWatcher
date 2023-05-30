@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <utility>
 #include "Measurement.h"
 #include "Device.h"
 #include "Date.h"
@@ -41,8 +42,8 @@ public:
 protected:
   bool is_malfunctionning;
   std::vector<Measurement> measurements;
-  vector<double> calculateMean(Sensor sensor, const Date start_date, const Date end_date);
-  vector<double> calculateMeanSurroundings(GPS coord, Date start_date, Date end_date);
+  //vector<double> calculateMean(Sensor sensor, const Date start_date, const Date end_date);
+  //vector<double> calculateMeanSurroundings(GPS coord, Date start_date, Date end_date);
 };
 
 bool operator < (const Sensor & unSensor, const Sensor & autreSensor);
