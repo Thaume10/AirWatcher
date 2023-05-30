@@ -42,6 +42,13 @@ int main(){
   for(vector<Cleaner>::iterator itCleaners = cleaners.begin(); itCleaners !=cleaners.end(); ++itCleaners){
     cout << "Cleaner : " << itCleaners->get_id() << " coord : " << itCleaners->get_coord().get_latitude() << " : " << itCleaners->get_coord().get_longitude() << " Debut : " << itCleaners->get_timestamp_start().To_string() <<  " Fin : " << itCleaners->get_timestamp_stop().To_string() << endl;
   }
+
+  cout << "----------------MEASUREMENTS--------------" << endl;
+  vector<Measurement> measurements = Data::getMeasurements();
+  for(vector<Measurement>::iterator itMeasurements = measurements.begin(); itMeasurements !=measurements.end(); ++itMeasurements){
+    cout << "Measurement value : " << itMeasurements->get_value() << " timestamp : " << itMeasurements->get_timestamp().To_string() << " attribute : " << itMeasurements->get_attribute().get_id() << endl;
+  }
+
   return 0;
 }
 

@@ -12,15 +12,15 @@ public:
 
   
 
-  inline double get_value() const {
+   double get_value() const {
         return value;
     }
 
-    inline Date get_timestamp() const {
+    Date get_timestamp() const {
         return timestamp;
     }
 
-    inline Attribute get_attribute() const {
+    Attribute &get_attribute() {
         return attibute;
     }
   

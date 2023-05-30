@@ -10,6 +10,7 @@ using namespace std;
 vector<User> Data::users;
 vector<Sensor> Data::sensors;
 vector<Cleaner> Data::cleaners;
+vector<Measurement> Data::measurements;
 
 Data::Data(){
 }
@@ -37,6 +38,28 @@ void Data::Load_CSV(){
 
     sensor.set_coord(pos);
     sensors.push_back(sensor);
+  } 
+  fichier.close();
+
+  //Measurements
+  fichier.open("data/measurements.csv");
+  while(!fichier.eof()){
+    string datestr;
+    string sensorid;
+    string attribute_id;
+    double val;
+    getline(fichier, datestr, ';');
+    getline(fichier, sensorid, ';');
+    getline(fichier, attribute_id, ';');
+    fichier >> val;
+    string temp;
+    getline(fichier, temp, ';');
+    fichier >> ws;
+    Date date;
+    date.String_to_time(datestr);
+    Measurement m(val, date);
+    m.get_attribute().set_id(attribute_id);
+    measurements.push_back(m);
   } 
   fichier.close();
 
@@ -116,6 +139,10 @@ vector<Sensor>& Data::getSensors(){
 
 vector<Cleaner>& Data::getCleaners(){
   return Data::cleaners;
+}
+
+vector<Measurement>& Data::getMeasurements() {
+    return measurements;
 }
 
   bool Data::comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {

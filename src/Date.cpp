@@ -10,9 +10,9 @@ Date::Date() {
     time = std::time(nullptr);
 }
 
-std::string Date::To_string() {
+string Date::To_string() {
     ostringstream oss;
-    oss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
+    oss << put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
 
