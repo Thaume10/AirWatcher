@@ -18,20 +18,13 @@ struct Sensor {
     double longitude;
 };
 
-struct Measurement {
-    string timestamp;
-    string sensorID;
-    string attributeID;
-    double value;
-};
-
 class SensorAnalyzer {
 public:
     SensorAnalyzer();
-    bool analyzeSensor(const string& userID, const string& sensorID, const vector<Sensor>& sensors, const vector<Measurement>& measurements);
+    bool analyzeSensor(const Sensor& sensor, const Date& start_date);
 private:
-    double calculateMeanSurroundings(double localisation, double zone, const vector<Sensor>& sensors, const vector<Measurement>& measurements);
-    double calculateMean(const string& sensorID, const string& start_date, int timeRange, const vector<Measurement>& measurements);
+    double calculateMeanSurroundings(GPS coord, Date start_date, Date end_date);
+    calculateMean(Sensor sensor, const Date start_date, const Date end_date);
 };
 
 #endif // SENSOR_ANALYZER_H
