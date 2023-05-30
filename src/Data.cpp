@@ -14,14 +14,37 @@ Data::Data(){
 }
 
 void Data::Load_CSV(){
-  //Users
-  //
-  std::set<User> userSet;
-  std::set<Sensor> sensorSet;
+  ifstream fichier;
 
-  ifstream fichier("data/users.csv");
-  string user_id;
+  //Sensors
+  string temp;
   string sensor_id;
+  double latitude;
+  double longitude;
+  fichier.open("data/sensors.csv");
+  while(!fichier.eof()){
+    getline(fichier, sensor_id, ';');
+    fichier >> latitude;
+    getline(fichier, temp, ';');
+    fichier >> longitude;
+    getline(fichier, temp, ';');
+    fichier >> ws;
+
+    Sensor sensor(sensor_id);
+    
+    GPS pos(latitude, longitude);
+
+    sensor.set_coord(pos);
+    sensors.push_back(sensor);
+  } 
+  fichier.close();
+
+  //Users
+  std::set<User> userSet;
+
+  fichier.open("data/users.csv");
+  string user_id;
+
   while(!fichier.eof()){
     getline(fichier, user_id, ';');
     getline(fichier, sensor_id, ';');
@@ -29,6 +52,16 @@ void Data::Load_CSV(){
 
     User user(user_id);
     Sensor sensor(sensor_id);
+
+    auto it = std::find_if(sensors.begin(), sensors.end(), [&](const Sensor& s) {
+      return s.get_id() == sensor_id;
+    });
+
+    if (it != sensors.end()) {
+      GPS pos = it->get_coord();
+      sensor.set_coord(pos);
+    }
+
     set<User>::iterator itUser = userSet.find(user);
     if(itUser != userSet.end()){
       user = *itUser;
@@ -36,16 +69,19 @@ void Data::Load_CSV(){
     user.add_sensor(sensor);
     userSet.erase(user);
     userSet.insert(user);
-    sensorSet.insert(sensor);
   }
+  fichier.close();
+
   users.resize(userSet.size());
   std::copy(userSet.begin(), userSet.end(), users.begin());
-  sensors.resize(sensorSet.size());
-  std::copy(sensorSet.begin(), sensorSet.end(), sensors.begin());
 }
 
 vector<User>& Data::getUsers(){
   return Data::users;
+}
+
+vector<Sensor>& Data::getSensors(){
+  return Data::sensors;
 }
 
   bool Data::comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {

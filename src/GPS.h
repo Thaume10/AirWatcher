@@ -7,11 +7,16 @@ protected:
     double longitude;
 
 public :
+    GPS();
+
+    GPS(double latitude, double longitude);
+
     inline int get_latitude() const {
         return latitude;
     }
     inline int get_longitude() const {
         return longitude;
     }
+    
 };
 #endif

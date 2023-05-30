@@ -18,7 +18,7 @@ bool User::Sign_up(std::string login, std::string password) {
 
     bool is_unique = true;
 
-    for (const auto &user : Data.users) {
+    for (const auto &user : Data::getUsers()) {
         if (user.id == login) {
             is_unique = false;
         }

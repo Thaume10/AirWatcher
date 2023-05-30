@@ -10,8 +10,13 @@ int main(){
     cout << "User : " << itUsers->getId() << endl;
     std::vector<Sensor> sensors = itUsers->getSensors();
     for(vector<Sensor>::iterator itSensor = sensors.begin(); itSensor != sensors.end(); ++itSensor){
-      cout << "\tSensor : " << itSensor->get_id() << endl;
+      cout << "\tSensor : " << itSensor->get_id() << " coordonnees : " << itSensor->get_coord().get_latitude() << " : " << itSensor->get_coord().get_longitude() << endl;
     }
+  }
+
+  vector<Sensor> sensors = Data::getSensors();
+  for(vector<Sensor>::iterator itSensor = sensors.begin(); itSensor!= sensors.end(); ++itSensor){
+    cout << "Sensor : " << itSensor->get_id() << " coordonnees : " << itSensor->get_coord().get_latitude() << " " << itSensor->get_coord().get_longitude() << endl;
   }
 
   return 0;
