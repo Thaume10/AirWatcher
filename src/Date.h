@@ -21,5 +21,7 @@ public:
     bool operator>(const Date& other) const {
         return time > other.time;
     }
+
+    void add_days(int d);
 };
 #endif

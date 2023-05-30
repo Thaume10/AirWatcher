@@ -22,3 +22,9 @@ void Date::String_to_time(std::string time) {
     ss >> get_time(&dt, "%Y-%m-%d %H:%M:%S");
     this->time = mktime(&dt);
 }
+
+void Date::add_days(int d) {
+    tm *ti = localtime(&time);
+    ti->tm_mday += d;
+    time = mktime(ti);
+}
