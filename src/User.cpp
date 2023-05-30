@@ -1,5 +1,7 @@
 #include "User.h"
 
+#include "Data.h"
+
 using namespace std;
 
 User::User(){
@@ -13,7 +15,16 @@ bool User::Sign_up(std::string login, std::string password) {
     this->login = login;
     this->password = password;
     // TODO: vérifier unique
-    return true;
+
+    bool is_unique = true;
+
+    for (const auto &user : Data.users) {
+        if (user.id == login) {
+            is_unique = false;
+        }
+    }
+
+    return is_unique;
 }
 
 void User::add_sensor(Sensor sensor) {
