@@ -11,6 +11,7 @@ vector<User> Data::users;
 vector<Sensor> Data::sensors;
 vector<Cleaner> Data::cleaners;
 vector<Measurement> Data::measurements;
+vector<Provider> Data::providers;
 
 Data::Data(){
 }
@@ -124,9 +125,48 @@ void Data::Load_CSV(){
     cleaners.push_back(cleaner);
   }
   fichier.close();
+  
+  //Provider
+  std::set<Provider> providerSet;
+
+  fichier.open("data/providers.csv");
+  string provider_id;
+
+  while(!fichier.eof()){
+    getline(fichier, provider_id, ';');
+    getline(fichier, cleaner_id, ';');
+    fichier >> ws;
+
+    Provider provider(user_id);
+    Cleaner cleaner(cleaner_id);
+
+    auto it = std::find_if(cleaners.begin(), cleaners.end(), [&](const Cleaner& c) {
+      return c.get_id() == cleaner_id;
+    });
+
+    if (it != cleaners.end()) {
+      GPS pos = it->get_coord();
+      cleaner.set_coord(pos);
+      Date debut = it->get_timestamp_start();
+      Date fin = it->get_timestamp_stop();
+      cleaner.set_timestamp_start(debut);
+      cleaner.set_timestamp_stop(fin);
+    }
+
+    set<Provider>::iterator itProvider = providerSet.find(provider);
+    if(itProvider != providerSet.end()){
+      provider = *itProvider;
+    }
+    provider.add_cleaner(cleaner);
+    providerSet.erase(provider);
+    providerSet.insert(provider);
+  }
+  fichier.close();
 
   users.resize(userSet.size());
   std::copy(userSet.begin(), userSet.end(), users.begin());
+  providers.resize(providerSet.size());
+  std::copy(providerSet.begin(), providerSet.end(), providers.begin());
 }
 
 vector<User>& Data::getUsers(){
@@ -143,6 +183,10 @@ vector<Cleaner>& Data::getCleaners(){
 
 vector<Measurement>& Data::getMeasurements() {
     return measurements;
+}
+
+vector<Provider>& Data::getProviders(){
+  return providers;
 }
 
   bool Data::comparerParDouble(const std::pair<Sensor, double>& paire1, const std::pair<Sensor, double>& paire2) {
