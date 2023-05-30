@@ -1,6 +1,22 @@
 #include <iostream>
 #include "Data.h"
+#include "Person.h"
 using namespace std;
+
+void unitTestsPrecisePosition(){
+    person p;
+    Date start;
+    Date end;
+    start.String_to_time("07/07/2019  12:00:00");
+    end.String_to_time("20/11/2019  12:00:00")
+    vector<double> valid = p.Stats_precise_position(GPS(43,2) ,start ,end ) ;
+    std::cout<<"O3\tSO2\tNO2\tPM10"
+    for (double value : valid) {
+        std::cout << value << "\t";
+    }
+    std::cout << std::endl;
+
+}
 
 int main(){
   Data::Load_CSV();
@@ -28,3 +44,4 @@ int main(){
   }
   return 0;
 }
+

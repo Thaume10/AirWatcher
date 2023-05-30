@@ -9,6 +9,10 @@ Person::Person() {
 
 vector<double> Stats_precise_position(GPS position , Date start, Date end)
 {
+    if(start>end){
+        vector<double> vide;
+        return vide ;
+    }
     Data data;
     vector<pair<Sensor, double>> listVector =data.get_five_nearest_sensors(position);
     vector<pair<Sensor, double>>::iterator itDebut = listVector.begin();
