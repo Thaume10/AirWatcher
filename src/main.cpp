@@ -11,7 +11,7 @@ int main(){
     cout << "User : " << itUsers->getId() << endl;
     std::vector<Sensor> sensors = itUsers->getSensors();
     for(vector<Sensor>::iterator itSensor = sensors.begin(); itSensor != sensors.end(); ++itSensor){
-      cout << "\tSensor : " << itSensor->id << endl;
+      cout << "\tSensor : " << itSensor->get_id() << endl;
     }
   }
 
