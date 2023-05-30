@@ -6,9 +6,13 @@
 class Attribute {
 public:
 
-inline std::string get_id() const {
+ std::string get_id() const {
         return id;
     }
+
+ void set_id(std::string id) {
+     this->id = id;
+ }
 
 protected:
     std::string id;
