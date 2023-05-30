@@ -3,10 +3,9 @@
 using namespace std;
 
 int main(){
-  Data data;
-  data.Load_CSV();
+  Data::Load_CSV();
 
-  vector<User> users = data.getUsers();
+  vector<User> users = Data::getUsers();
   for(vector<User>::iterator itUsers = users.begin(); itUsers!=users.end(); ++itUsers){
     cout << "User : " << itUsers->getId() << endl;
     std::vector<Sensor> sensors = itUsers->getSensors();

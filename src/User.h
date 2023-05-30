@@ -18,9 +18,11 @@ public:
 
   virtual bool Sign_up(std::string login, std::string password);
   
-  std::string& getId();
+  std::string getId()const;
   
-  std::vector<Sensor>& getSensors();
+  std::vector<Sensor> getSensors()const;
+
+  friend bool operator < (const User & unUser, const User & autreUser);
 
 protected:
   std::string id;
@@ -28,4 +30,7 @@ protected:
   bool is_trustworthy;
   std::vector<Sensor> sensors;
 };
+
+bool operator < (const User & unUser, const User & autreUser);
+
 #endif
