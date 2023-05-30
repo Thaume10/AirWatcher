@@ -74,6 +74,17 @@ int main(){
     //cout << "Measurement value : " << itMeasurements->get_value() << " timestamp : " << itMeasurements->get_timestamp().To_string() << " attribute : " << itMeasurements->get_attribute().get_id() << endl;
   }
   unitTestsPrecisePosition();
+
+  cout << "----------------PROVIDERS--------------" << endl;
+  vector<Provider> providers = Data::getProviders();
+  for(vector<Provider>::iterator itProvider = providers.begin(); itProvider !=providers.end(); ++itProvider){
+    cout << "Provider id : " << itProvider->get_id() << endl;
+    vector<Cleaner> cleaners = itProvider->get_cleaners();
+    for(vector<Cleaner>::iterator itCleaner = cleaners.begin(); itCleaner != cleaners.end(); ++itCleaner){
+      cout << "Cleaner : " << itCleaner->get_id() << " coord : " << itCleaner->get_coord().get_latitude() << " : " << itCleaner->get_coord().get_longitude() << " Debut : " << itCleaner->get_timestamp_start().To_string() <<  " Fin : " << itCleaner->get_timestamp_stop().To_string() << endl;
+    }
+  }
+
   return 0;
 }
 

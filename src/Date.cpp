@@ -6,8 +6,7 @@ using namespace std;
 #include <chrono>
 #include <iomanip>
 
-Date::Date() {
-    time = std::time(nullptr);
+Date::Date() : time(std::time(nullptr)) {
 }
 
 string Date::To_string() {
