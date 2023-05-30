@@ -2,6 +2,10 @@
 
 using namespace std;
 
+Sensor::Sensor(){
+
+}
+
 Sensor::Sensor(string id) {
     this->id = id;
 }
