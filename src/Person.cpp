@@ -7,7 +7,7 @@ using namespace std;
 Person::Person() {
 }
 
-vector<double> Person::Stats_precise_position(GPS position , Date start, Date end)
+vector<double> Person::Stats_precise_position(GPS position , Date start, Date end, Date& proche)
 {
     if(start>end){
         vector<double> vide;
@@ -26,7 +26,7 @@ vector<double> Person::Stats_precise_position(GPS position , Date start, Date en
     double mfO3 = 0, mfSO2 = 0, mfNO2 = 0, mfPM10 = 0, sumD = 0;
     for (auto it = itDebut; it != itFin; ++it) {
         cout<<"Sensor: "<<it->first.get_id();
-        vector<Measurement> measure =data.get_measures_of_sensor(it->first.get_id(),  start, end);
+        vector<Measurement> measure =data.get_measures_of_sensor(it->first.get_id(),  start, end,proche);
         vector<Measurement>::iterator it2Debut = measure.begin();
         vector<Measurement>::iterator it2Fin = measure.end();
         //cout<<measure.size()<<endl;

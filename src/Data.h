@@ -29,7 +29,7 @@ public:
 
   static std::vector<std::pair<Sensor, double>> get_five_nearest_sensors(GPS coord);
 
-  static std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end);
+  static std::vector<Measurement> get_measures_of_sensor(std::string sensorId, Date start, Date end,Date& proche);
 
   static std::vector<std::string> get_aircleaner_impact(std::string cleaner_id);
 

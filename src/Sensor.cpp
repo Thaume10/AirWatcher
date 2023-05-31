@@ -30,7 +30,8 @@ bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
 
 
 vector<double> Sensor::calculateMean(const Sensor& sensor, const Date start_date, const Date end_date) {
-    vector<Measurement> measures = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date);
+    Date proche;
+    vector<Measurement> measures = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date,proche);
     vector<double> mean;
 
     int count_O3 = 0;
@@ -94,7 +95,7 @@ bool Sensor::analyzeSensor(const Sensor& sensor, const Date& start_date) {
     bool reliable = true;
     int timeRange = 30;  //days
     double deltaOfReliability = 10;
-
+    Date proche;
     time_t currentTime = time(nullptr);
     struct tm *localTime = localtime(&currentTime);
     char dateTimeString[20];
@@ -106,7 +107,7 @@ bool Sensor::analyzeSensor(const Sensor& sensor, const Date& start_date) {
     Date end_date = today;
     end_date.add_days(timeRange);
 
-    vector<Measurement> measures_sensor = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date);
+    vector<Measurement> measures_sensor = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date, proche);
 
     if ((end_date) > today) {
         throw invalid_argument("La période de test doit commencer au moins 30 jours avant aujourd'hui");

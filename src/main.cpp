@@ -7,11 +7,12 @@ void unitTestsPrecisePosition(){
     User u;
     Date start;
     Date end;
+    Date proche;
     start.String_to_time("2023-01-01 10:00:00");
     end.String_to_time("2023-01-01  14:00:00");
     cout<<endl<<endl;
     cout<<"Unit test valide avec sensors créés :"<<endl;
-    vector<double> valid = u.Stats_precise_position(GPS(0.5,0.5) ,start ,end ) ;
+    vector<double> valid = u.Stats_precise_position(GPS(0.5,0.5) ,start ,end,proche ) ;
     cout<<"------------------------"<<endl;
     std::cout<<"O3\tSO2\tNO2\tPM10"<<endl;
     for (double value : valid) {
@@ -24,7 +25,7 @@ void unitTestsPrecisePosition(){
     end.String_to_time("2019-01-09  14:00:00");
     cout<<endl<<endl;
     cout<<"Unit test valide avec jeux de donée :"<<endl;
-    vector<double> valid2 = u.Stats_precise_position(GPS(44.2,2.4) ,start ,end ) ;
+    vector<double> valid2 = u.Stats_precise_position(GPS(44.2,2.4) ,start ,end,proche ) ;
     cout<<"------------------------"<<endl;
     std::cout<<"O3\tSO2\tNO2\tPM10"<<endl;
     for (double value : valid2) {
@@ -36,10 +37,25 @@ void unitTestsPrecisePosition(){
     end.String_to_time("2019-01-09  10:00:00");
     cout<<endl<<endl;
     cout<<"Unit test invalide  :"<<endl;
-    vector<double> valid3 = u.Stats_precise_position(GPS(44.2,2.4) ,start ,end ) ;
+    vector<double> valid3 = u.Stats_precise_position(GPS(44.2,2.4) ,start ,end,proche ) ;
     if(valid3.empty()){
       cout<<"L'heure de fin est plus petite que l'heure de début"<<endl;
     }
+
+    start.String_to_time("2050-01-01 10:00:00");
+    end.String_to_time("2050-01-01  14:00:00");
+    cout<<endl<<endl;
+    cout<<"Unit test valide dans un interval sans mesures :"<<endl;
+    vector<double> valid4 = u.Stats_precise_position(GPS(0.5,0.5) ,start ,end,proche ) ;
+    if(proche.To_string()!=""){
+      cout<<endl<<"No data in this period, the closest data available is from : "<<proche.To_string()<<endl;
+    }
+    cout<<"------------------------"<<endl;
+    std::cout<<"O3\tSO2\tNO2\tPM10"<<endl;
+    for (double value : valid4) {
+        std::cout << value << "\t";
+    }
+    std::cout << std::endl;
 
 }
 
@@ -73,7 +89,7 @@ int main(){
   for(vector<Measurement>::iterator itMeasurements = measurements.begin(); itMeasurements !=measurements.end(); ++itMeasurements){
     //cout << "Measurement value : " << itMeasurements->get_value() << " timestamp : " << itMeasurements->get_timestamp().To_string() << " attribute : " << itMeasurements->get_attribute().get_id() << endl;
   }
-  unitTestsPrecisePosition();
+  
 
   cout << "----------------PROVIDERS--------------" << endl;
   vector<Provider> providers = Data::getProviders();
@@ -84,7 +100,7 @@ int main(){
       cout << "Cleaner : " << itCleaner->get_id() << " coord : " << itCleaner->get_coord().get_latitude() << " : " << itCleaner->get_coord().get_longitude() << " Debut : " << itCleaner->get_timestamp_start().To_string() <<  " Fin : " << itCleaner->get_timestamp_stop().To_string() << endl;
     }
   }
-
+  unitTestsPrecisePosition();
   return 0;
 }
 

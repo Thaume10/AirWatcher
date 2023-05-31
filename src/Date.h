@@ -22,6 +22,15 @@ public:
         return time > other.time;
     }
 
+  
+
+    Date operator-(const Date& other) {
+    Date result;
+    result.time = this->time - other.time;
+    return result;
+    }
+
+
     void add_days(int d);
 };
 #endif

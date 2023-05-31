@@ -236,7 +236,7 @@ vector<Measurement> Data::get_measurementsSensor(string sensorId){
 }
 
 
-vector<Measurement> Data::get_measures_of_sensor(string sensorId,  Date start, Date end){
+vector<Measurement> Data::get_measures_of_sensor(string sensorId,  Date start, Date end,Date& proche){
     vector<Measurement> result;
     vector<Measurement> list = get_measurementsSensor(sensorId);
     vector<Measurement>::iterator itDebut = list.begin();
@@ -247,7 +247,44 @@ vector<Measurement> Data::get_measures_of_sensor(string sensorId,  Date start, D
         }
     }
     if(result.empty()){
-      //A remplir
+      //cout<<"No data in this period, the closest data available is : "<<endl;
+
+
+      Date minap;
+      minap.String_to_time("2100-01-01  14:00:00");
+      Date minav;
+      minav.String_to_time("0001-01-01   14:00:00");
+      for (auto it = itDebut; it != itFin; ++it) {
+        Date diffBefore = start - minav;
+        Date diffAfter = minap - end;
+        if(it->get_timestamp()>end ){
+          Date temp = it->get_timestamp()-end;
+          if((temp<diffAfter)){
+            minap=it->get_timestamp();
+        }
+        }else if(it->get_timestamp()<start ){
+          Date temp = start-it->get_timestamp();
+          if(temp<diffBefore){
+            minav=it->get_timestamp();
+          }
+        }
+    }
+    Date diffBefore = start - minav;
+    Date diffAfter = minap - end;
+    Date min;
+    if(diffAfter<diffBefore){
+       min = minap;
+    }else{
+       min = minav;
+    }
+    proche=min;
+    for (auto it = itDebut; it != itFin; ++it) {
+        if(it->get_timestamp().To_string()==min.To_string()){
+            result.push_back(*it);
+        }
+    }
+
+      
     }
     return result;
 }

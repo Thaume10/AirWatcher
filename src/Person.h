@@ -23,7 +23,7 @@ public:
   
   std::vector<double> Stats_circular_area(GPS position, double radius, Date start, Date end);
 
-  std::vector<double> Stats_precise_position(GPS position, Date start, Date end);
+  std::vector<double> Stats_precise_position(GPS position, Date start, Date end, Date& proche);
 
 protected:
   Person();
