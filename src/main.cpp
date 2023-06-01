@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Data.h"
 #include "User.h"
+#include <stdio.h>
 using namespace std;
 
 void unitTestsPrecisePosition(){
@@ -59,6 +60,38 @@ void unitTestsPrecisePosition(){
 
 }
 
+void unitTestsAnalyzeSensor(){
+    Sensor sensor1("Sensor5");
+    Date start_date;
+    Date measure_date = start_date;
+    measure_date.add_days(-10);
+
+    // Set up dates
+    start_date.String_to_time("2019-01-09 10:00:00");
+
+    // Test : Le capteur doit être fiable si toutes les mesures sont positives et que la moyenne ne diffère pas de plus de deltaOfReliability
+    printf("\nTest si OK dans des conditionns normales");
+    if(sensor1.analyzeSensor(sensor1, start_date)){
+        printf("\n---- Test validé ----\n");
+    }
+
+    // Test : Le capteur ne doit pas être fiable si une ou plusieurs mesures sont nulles ou négatives (Sensor36)
+    printf("\nTest si NOK dans le cas où une mesure est negative ou inf à 0");
+    Sensor sensor2("Sensor36");
+
+    if(!sensor2.analyzeSensor(sensor2, start_date)){
+        printf("\n---- Test validé ----\n");
+    }
+
+    // Test : Le capteur ne doit pas être fiable si la moyenne diffère de plus de deltaOfReliability par rapport à la moyenne des capteurs environnants.
+    printf("\nTest si NOK dans le cas où le delta est depassé");
+    Sensor sensor3("Sensor0");
+
+    if(!sensor3.analyzeSensor(sensor3, start_date)){
+        printf("\n---- Test validé ----\n");
+    }
+}
+
 int main(){
   Data::Load_CSV();
 
@@ -68,7 +101,7 @@ int main(){
     cout << "User : " << itUsers->getId() << endl;
     std::vector<Sensor> sensors = itUsers->getSensors();
     for(vector<Sensor>::iterator itSensor = sensors.begin(); itSensor != sensors.end(); ++itSensor){
-      //cout << "\tSensor : " << itSensor->get_id() << " coordonnees : " << itSensor->get_coord().get_latitude() << " : " << itSensor->get_coord().get_longitude() << endl;
+      cout << "\tSensor : " << itSensor->get_id() << " coordonnees : " << itSensor->get_coord().get_latitude() << " : " << itSensor->get_coord().get_longitude() << endl;
     }
   }
 
@@ -101,6 +134,7 @@ int main(){
     }
   }
   unitTestsPrecisePosition();
+  unitTestsAnalyzeSensor();
   return 0;
 }
 
