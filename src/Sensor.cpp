@@ -25,10 +25,6 @@ bool operator < (const Sensor & unSensor, const Sensor & autreSensor){
   return unSensor.get_id() < autreSensor.get_id();
 }
 
-
-
-
-
 vector<double> Sensor::calculateMean(const Sensor& sensor, const Date start_date, const Date end_date) {
     Date proche;
     vector<Measurement> measures = Data::get_measures_of_sensor(sensor.get_id(), start_date, end_date,proche);
@@ -79,12 +75,12 @@ vector<double> Sensor::calculateMeanSurroundings(GPS coord, Date start_date, Dat
 
     for(auto& s : five_nearest) {
         vector<double> result = calculateMean(s, start_date, end_date);
-        for (int i = 0; i < result.size(); i++) {
+        for (size_t i = 0; i < result.size(); i++) {
             mean[i] += result[i];
         }
     }
 
-    for (int i = 0; i < mean.size(); i++) {
+    for (size_t i = 0; i < mean.size(); i++) {
         mean[i] /= 5;
     }
 
