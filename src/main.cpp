@@ -70,25 +70,25 @@ void unitTestsAnalyzeSensor(){
     start_date.String_to_time("2019-01-09 10:00:00");
 
     // Test : Le capteur doit être fiable si toutes les mesures sont positives et que la moyenne ne diffère pas de plus de deltaOfReliability
-    printf("\nTest si OK dans des conditionns normales");
+    cout<<"\nTest si OK dans des conditionns normales"<<endl;
     if(sensor1.analyzeSensor(sensor1, start_date)){
-        printf("\n---- Test validé ----\n");
+        cout<<"\n---- Test validé ----\n"<<endl;
     }
 
     // Test : Le capteur ne doit pas être fiable si une ou plusieurs mesures sont nulles ou négatives (Sensor36)
-    printf("\nTest si NOK dans le cas où une mesure est negative ou inf à 0");
+    cout<<"\nTest si NOK dans le cas où une mesure est negative ou inf à 0"<<endl;
     Sensor sensor2("Sensor36");
 
     if(!sensor2.analyzeSensor(sensor2, start_date)){
-        printf("\n---- Test validé ----\n");
+        cout<<"\n---- Test validé ----\n"<<endl;
     }
 
     // Test : Le capteur ne doit pas être fiable si la moyenne diffère de plus de deltaOfReliability par rapport à la moyenne des capteurs environnants.
-    printf("\nTest si NOK dans le cas où le delta est depassé");
+    cout<<"\nTest si NOK dans le cas où le delta est depassé"<<endl;
     Sensor sensor3("Sensor0");
 
     if(!sensor3.analyzeSensor(sensor3, start_date)){
-        printf("\n---- Test validé ----\n");
+        cout<<"\n---- Test validé ----\n"<<endl;
     }
 }
 

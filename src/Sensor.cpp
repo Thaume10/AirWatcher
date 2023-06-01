@@ -86,14 +86,7 @@ bool Sensor::analyzeSensor(const Sensor& sensor, const Date& start_date) {
     double deltaOfReliability = 10;
     Date proche;
 
-    std::time_t now = std::time(nullptr);
-    std::tm *timeinfo = std::localtime(&now);
-
-    std::stringstream ss;
-    ss << std::put_time(timeinfo, "%Y-%m-%d %H:%M:%S");
-
     Date today;
-    today.String_to_time(ss.str());
 
     Date end_date = start_date;
     end_date.add_days(timeRange);
