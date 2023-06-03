@@ -21,13 +21,13 @@ void unitTestsPrecisePosition() {
     cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     cout << "------------------------" << endl;
     cout << "O3\tSO2\tNO2\tPM10" << endl;
-    for (double value : valid) {
+    for (const auto &value : valid) {
         cout << value << "\t";
     }
     cout << endl;
 
     start.String_to_time("2019-01-09 10:00:00");
-    end.String_to_time("2019-01-09  14:00:00");
+    end.String_to_time("2019-01-09 14:00:00");
     cout << endl << endl;
     cout << "Unit test valide avec jeux de donée :" << endl;
     startTime = chrono::high_resolution_clock::now();
@@ -39,7 +39,7 @@ void unitTestsPrecisePosition() {
     cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     cout << "------------------------" << endl;
     cout << "O3\tSO2\tNO2\tPM10" << endl;
-    for (double value : valid2) {
+    for (const auto &value : valid2) {
         cout << value << "\t";
     }
     cout << endl;
@@ -70,14 +70,14 @@ void unitTestsPrecisePosition() {
     duration = endTime - startTime;
     elapsedTime = duration.count();
     cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
-    if (proche.To_string() != "") {
+    if (!proche.To_string().empty()) {
         cout << endl
              << "No data in this period, the closest data available is from : "
              << proche.To_string() << endl;
     }
     cout << "------------------------" << endl;
     cout << "O3\tSO2\tNO2\tPM10" << endl;
-    for (double value : valid4) {
+    for (const auto &value : valid4) {
         cout << value << "\t";
     }
     cout << endl;

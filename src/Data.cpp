@@ -222,7 +222,7 @@ double Data::calculerDistance(const GPS &coord1, const GPS &coord2) {
 
 vector<Measurement> Data::get_measurementsSensor(const string &sensorId) {
     vector<Measurement> list;
-    for (Measurement &element : getMeasurements()) {
+    for (const Measurement &element : getMeasurements()) {
         if (element.get_sensor().get_id() == sensorId) {
             list.push_back(element);
         }
