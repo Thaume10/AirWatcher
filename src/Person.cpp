@@ -20,8 +20,8 @@ vector<double> Person::Stats_precise_position(const GPS &position,
     for (const auto& element : listVector) {
         const Sensor& sensor = element.first;
         double value = element.second;
-        std::cout << "Sensor: " << sensor.get_id() << ", distance: " << value <<
-    std::endl;
+        cout << "Sensor: " << sensor.get_id() << ", distance: " << value <<
+    endl;
     }
     */
     vector<pair<Sensor, double>>::iterator itDebut = listVector.begin();
@@ -40,7 +40,7 @@ vector<double> Person::Stats_precise_position(const GPS &position,
         // cout<<measure.size()<<endl;
         /*
         for (const auto &element : measure) {
-            // std::cout << "mesure: " << element.get_value() << std::endl;
+            // cout << "mesure: " << element.get_value() << endl;
         }
         */
         double mO3 = 0;

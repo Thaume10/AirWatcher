@@ -12,49 +12,49 @@ void unitTestsPrecisePosition() {
     end.String_to_time("2023-01-01  14:00:00");
     cout << endl << endl;
     cout << "Unit test valide avec sensors créés :" << endl;
-    auto startTime = std::chrono::high_resolution_clock::now();
+    auto startTime = chrono::high_resolution_clock::now();
     vector<double> valid =
         u.Stats_precise_position(GPS(0.5, 0.5), start, end, proche);
-    auto endTime = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> duration = endTime - startTime;
+    auto endTime = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = endTime - startTime;
     double elapsedTime = duration.count();
-    std::cout << endl << "Temps écoulé : " << elapsedTime << " ms" << std::endl;
+    cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     cout << "------------------------" << endl;
-    std::cout << "O3\tSO2\tNO2\tPM10" << endl;
+    cout << "O3\tSO2\tNO2\tPM10" << endl;
     for (double value : valid) {
-        std::cout << value << "\t";
+        cout << value << "\t";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     start.String_to_time("2019-01-09 10:00:00");
     end.String_to_time("2019-01-09  14:00:00");
     cout << endl << endl;
     cout << "Unit test valide avec jeux de donée :" << endl;
-    startTime = std::chrono::high_resolution_clock::now();
+    startTime = chrono::high_resolution_clock::now();
     vector<double> valid2 =
         u.Stats_precise_position(GPS(44.2, 2.4), start, end, proche);
-    endTime = std::chrono::high_resolution_clock::now();
+    endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
-    std::cout << endl << "Temps écoulé : " << elapsedTime << " ms" << std::endl;
+    cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     cout << "------------------------" << endl;
-    std::cout << "O3\tSO2\tNO2\tPM10" << endl;
+    cout << "O3\tSO2\tNO2\tPM10" << endl;
     for (double value : valid2) {
-        std::cout << value << "\t";
+        cout << value << "\t";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     start.String_to_time("2019-01-09 14:00:00");
     end.String_to_time("2019-01-09  10:00:00");
     cout << endl << endl;
     cout << "Unit test invalide  :" << endl;
-    startTime = std::chrono::high_resolution_clock::now();
+    startTime = chrono::high_resolution_clock::now();
     vector<double> valid3 =
         u.Stats_precise_position(GPS(44.2, 2.4), start, end, proche);
-    endTime = std::chrono::high_resolution_clock::now();
+    endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
-    std::cout << endl << "Temps écoulé : " << elapsedTime << " ms" << std::endl;
+    cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     if (valid3.empty()) {
         cout << "L'heure de fin est plus petite que l'heure de début" << endl;
     }
@@ -63,24 +63,24 @@ void unitTestsPrecisePosition() {
     end.String_to_time("2050-01-01  14:00:00");
     cout << endl << endl;
     cout << "Unit test valide dans un interval sans mesures :" << endl;
-    startTime = std::chrono::high_resolution_clock::now();
+    startTime = chrono::high_resolution_clock::now();
     vector<double> valid4 =
         u.Stats_precise_position(GPS(0.5, 0.5), start, end, proche);
-    endTime = std::chrono::high_resolution_clock::now();
+    endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
-    std::cout << endl << "Temps écoulé : " << elapsedTime << " ms" << std::endl;
+    cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
     if (proche.To_string() != "") {
         cout << endl
              << "No data in this period, the closest data available is from : "
              << proche.To_string() << endl;
     }
     cout << "------------------------" << endl;
-    std::cout << "O3\tSO2\tNO2\tPM10" << endl;
+    cout << "O3\tSO2\tNO2\tPM10" << endl;
     for (double value : valid4) {
-        std::cout << value << "\t";
+        cout << value << "\t";
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
 void unitTestsAnalyzeSensor() {
@@ -127,7 +127,7 @@ int main() {
     for (vector<User>::iterator itUsers = users.begin(); itUsers != users.end();
          ++itUsers) {
         cout << "User : " << itUsers->getId() << endl;
-        std::vector<Sensor> sensors = itUsers->getSensors();
+        vector<Sensor> sensors = itUsers->getSensors();
         for (vector<Sensor>::iterator itSensor = sensors.begin();
              itSensor != sensors.end(); ++itSensor) {
             cout << "\tSensor : " << itSensor->get_id()

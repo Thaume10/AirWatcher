@@ -70,7 +70,7 @@ void Data::Load_CSV() {
     fichier.close();
 
     // Users
-    std::set<User> userSet;
+    set<User> userSet;
 
     fichier.open("data/users.csv");
     string user_id;
@@ -84,7 +84,7 @@ void Data::Load_CSV() {
         Sensor sensor(sensor_id);
 
         auto it =
-            std::find_if(sensors.begin(), sensors.end(), [&](const Sensor &s) {
+            find_if(sensors.begin(), sensors.end(), [&](const Sensor &s) {
                 return s.get_id() == sensor_id;
             });
 
@@ -133,7 +133,7 @@ void Data::Load_CSV() {
     fichier.close();
 
     // Provider
-    std::set<Provider> providerSet;
+    set<Provider> providerSet;
 
     fichier.open("data/providers.csv");
     string provider_id;
@@ -146,7 +146,7 @@ void Data::Load_CSV() {
         Provider provider(user_id);
         Cleaner cleaner(cleaner_id);
 
-        auto it = std::find_if(
+        auto it = find_if(
             cleaners.begin(), cleaners.end(),
             [&](const Cleaner &c) { return c.get_id() == cleaner_id; });
 
@@ -168,9 +168,9 @@ void Data::Load_CSV() {
     fichier.close();
 
     users.resize(userSet.size());
-    std::copy(userSet.begin(), userSet.end(), users.begin());
+    copy(userSet.begin(), userSet.end(), users.begin());
     providers.resize(providerSet.size());
-    std::copy(providerSet.begin(), providerSet.end(), providers.begin());
+    copy(providerSet.begin(), providerSet.end(), providers.begin());
 }
 
 vector<User> &Data::getUsers() { return Data::users; }
@@ -183,8 +183,8 @@ vector<Measurement> &Data::getMeasurements() { return measurements; }
 
 vector<Provider> &Data::getProviders() { return providers; }
 
-bool Data::comparerParDouble(const std::pair<Sensor, double> &paire1,
-                             const std::pair<Sensor, double> &paire2) {
+bool Data::comparerParDouble(const pair<Sensor, double> &paire1,
+                             const pair<Sensor, double> &paire2) {
     return paire1.second > paire2.second;
 }
 
@@ -195,7 +195,7 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
     for (auto it = itDebut; it != itFin; ++it) {
         if (top5.size() < 5) {
             if (!it->get_is_malfunctionning()) {
-                top5.push_back(std::make_pair(
+                top5.push_back(make_pair(
                     *it, calculerDistance(coord, it->get_coord())));
             }
         } else {
@@ -203,7 +203,7 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
             if (!it->get_is_malfunctionning() &&
                 top5[0].second > calculerDistance(coord, it->get_coord())) {
                 top5.erase(top5.begin());
-                top5.push_back(std::make_pair(
+                top5.push_back(make_pair(
                     *it, calculerDistance(coord, it->get_coord())));
             }
         }
@@ -216,7 +216,7 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
 double Data::calculerDistance(const GPS &coord1, const GPS &coord2) {
     double deltaX = coord2.get_latitude() - coord1.get_latitude();
     double deltaY = coord2.get_longitude() - coord1.get_longitude();
-    double distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+    double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
     return distance;
 }
 

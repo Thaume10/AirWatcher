@@ -10,12 +10,12 @@ Date::Date() : time(std::time(nullptr)) {}
 
 string Date::To_string() {
     ostringstream oss;
-    oss << put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
+    oss << put_time(localtime(&time), "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
 
-void Date::String_to_time(std::string time) {
-    tm dt;
+void Date::String_to_time(const string &time) {
+    tm dt{};
     istringstream ss{time};
     ss >> get_time(&dt, "%Y-%m-%d %H:%M:%S");
     this->time = mktime(&dt);
