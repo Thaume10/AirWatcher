@@ -57,7 +57,8 @@ vector<double> Sensor::calculateMean(const Sensor &sensor,
     return mean;
 }
 
-vector<double> Sensor::calculateMeanSurroundings(const GPS &coord, const Date &start_date,
+vector<double> Sensor::calculateMeanSurroundings(const GPS &coord,
+                                                 const Date &start_date,
                                                  const Date &end_date) {
     vector<pair<Sensor, double>> five_nearest_with_double =
         Data::get_five_nearest_sensors(coord);

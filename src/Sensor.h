@@ -37,7 +37,8 @@ protected:
     std::vector<double> calculateMean(const Sensor &sensor,
                                       const Date &start_date,
                                       const Date &end_date);
-    std::vector<double> calculateMeanSurroundings(const GPS &coord, const Date &start_date,
+    std::vector<double> calculateMeanSurroundings(const GPS &coord,
+                                                  const Date &start_date,
                                                   const Date &end_date);
 };
 

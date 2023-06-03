@@ -83,10 +83,9 @@ void Data::Load_CSV() {
         User user(user_id);
         Sensor sensor(sensor_id);
 
-        auto it =
-            find_if(sensors.begin(), sensors.end(), [&](const Sensor &s) {
-                return s.get_id() == sensor_id;
-            });
+        auto it = find_if(sensors.begin(), sensors.end(), [&](const Sensor &s) {
+            return s.get_id() == sensor_id;
+        });
 
         if (it != sensors.end()) {
             GPS pos = it->get_coord();
@@ -146,9 +145,9 @@ void Data::Load_CSV() {
         Provider provider(user_id);
         Cleaner cleaner(cleaner_id);
 
-        auto it = find_if(
-            cleaners.begin(), cleaners.end(),
-            [&](const Cleaner &c) { return c.get_id() == cleaner_id; });
+        auto it =
+            find_if(cleaners.begin(), cleaners.end(),
+                    [&](const Cleaner &c) { return c.get_id() == cleaner_id; });
 
         if (it != cleaners.end()) {
             GPS pos = it->get_coord();
@@ -195,16 +194,16 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
     for (auto it = itDebut; it != itFin; ++it) {
         if (top5.size() < 5) {
             if (!it->get_is_malfunctionning()) {
-                top5.push_back(make_pair(
-                    *it, calculerDistance(coord, it->get_coord())));
+                top5.push_back(
+                    make_pair(*it, calculerDistance(coord, it->get_coord())));
             }
         } else {
             sort(top5.begin(), top5.end(), comparerParDouble);
             if (!it->get_is_malfunctionning() &&
                 top5[0].second > calculerDistance(coord, it->get_coord())) {
                 top5.erase(top5.begin());
-                top5.push_back(make_pair(
-                    *it, calculerDistance(coord, it->get_coord())));
+                top5.push_back(
+                    make_pair(*it, calculerDistance(coord, it->get_coord())));
             }
         }
     }
