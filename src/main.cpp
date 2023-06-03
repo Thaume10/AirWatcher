@@ -182,6 +182,6 @@ int main() {
         }
     }
     unitTestsPrecisePosition();
-    // unitTestsAnalyzeSensor();
+    unitTestsAnalyzeSensor();
     return 0;
 }
