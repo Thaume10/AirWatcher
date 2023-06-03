@@ -38,9 +38,11 @@ vector<double> Person::Stats_precise_position(const GPS &position,
         vector<Measurement>::iterator it2Debut = measure.begin();
         vector<Measurement>::iterator it2Fin = measure.end();
         // cout<<measure.size()<<endl;
+        /*
         for (const auto &element : measure) {
             // std::cout << "mesure: " << element.get_value() << std::endl;
         }
+        */
         double mO3 = 0;
         double mSO2 = 0;
         double mNO2 = 0;
