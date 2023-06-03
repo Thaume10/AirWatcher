@@ -1,10 +1,9 @@
 #include "Data.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "Sensor.h"
 #include <algorithm>
-#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <set>
