@@ -3,8 +3,7 @@
 
 #include "Person.h"
 
-
-class GovernmentMember : public Person{
+class GovernmentMember : public Person {
 public:
     bool analyze_sensor(std::string sensor_id);
     bool mark_user_data_as_false(std::string user_id);

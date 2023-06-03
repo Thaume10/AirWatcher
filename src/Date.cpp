@@ -6,8 +6,7 @@ using namespace std;
 #include <chrono>
 #include <iomanip>
 
-Date::Date() : time(std::time(nullptr)) {
-}
+Date::Date() : time(std::time(nullptr)) {}
 
 string Date::To_string() {
     ostringstream oss;
@@ -17,7 +16,7 @@ string Date::To_string() {
 
 void Date::String_to_time(std::string time) {
     tm dt;
-    istringstream ss {time};
+    istringstream ss{time};
     ss >> get_time(&dt, "%Y-%m-%d %H:%M:%S");
     this->time = mktime(&dt);
 }

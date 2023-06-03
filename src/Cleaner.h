@@ -1,9 +1,9 @@
 #if !defined(CLEANER_H)
-#define CLEANER_H 
+#define CLEANER_H
 
-#include <vector>
 #include "Date.h"
 #include "Device.h"
+#include <vector>
 
 class Cleaner : public Device {
 protected:
@@ -12,7 +12,7 @@ protected:
 
 public:
     std::vector<std::string> get_impact();
-    Cleaner(std::string id);
+    Cleaner(const std::string &id);
     void set_timestamp_start(Date date);
     void set_timestamp_stop(Date date);
     Date get_timestamp_start();

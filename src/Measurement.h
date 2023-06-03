@@ -1,40 +1,28 @@
-#if ! defined ( MEASUREMENT_H )
+#if !defined(MEASUREMENT_H)
 #define MEASUREMENT_H
 
-#include "Date.h"
 #include "Attribute.h"
+#include "Date.h"
 #include "Sensor.h"
 
-class Measurement{
+class Measurement {
 public:
-  Measurement();
+    Measurement();
 
-  Measurement(double value, Date timestamp,std::string sensor);
+    Measurement(double value, const Date &timestamp, const std::string &sensor);
 
-  
+    double get_value() const { return value; }
 
-   double get_value() const {
-        return value;
-    }
+    Date get_timestamp() const { return timestamp; }
 
-    Date get_timestamp() const {
-        return timestamp;
-    }
+    Attribute &get_attribute() { return attibute; }
 
-    Attribute &get_attribute() {
-        return attibute;
-    }
-
-    Sensor get_sensor() {
-        return sensor;
-    }
-
-  
+    Sensor get_sensor() const { return sensor; }
 
 protected:
-  double value;
-  Date timestamp;
-  Attribute attibute;
-  Sensor sensor;
+    double value;
+    Date timestamp;
+    Attribute attibute;
+    Sensor sensor;
 };
 #endif

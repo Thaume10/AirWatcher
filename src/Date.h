@@ -1,8 +1,8 @@
 #if !defined(DATE_H)
 #define DATE_H
 
-#include <string>
 #include <ctime>
+#include <string>
 
 class Date {
 protected:
@@ -13,23 +13,16 @@ public:
     std::string To_string();
     void String_to_time(std::string time);
 
-    bool operator<(const Date& other) const {
-        return time < other.time;
-    }
+    bool operator<(const Date &other) const { return time < other.time; }
 
     // Surcharge de l'opérateur supérieur strict (>)
-    bool operator>(const Date& other) const {
-        return time > other.time;
+    bool operator>(const Date &other) const { return time > other.time; }
+
+    Date operator-(const Date &other) const {
+        Date result;
+        result.time = this->time - other.time;
+        return result;
     }
-
-  
-
-    Date operator-(const Date& other) {
-    Date result;
-    result.time = this->time - other.time;
-    return result;
-    }
-
 
     void add_days(int d);
 };

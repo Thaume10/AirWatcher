@@ -1,11 +1,11 @@
-#if ! defined ( TERMINAL_H )
+#if !defined(TERMINAL_H)
 #define TERMINAL_H
 
-class Terminal{
+class Terminal {
 public:
-  Terminal();
+    Terminal();
 
-  void Menu();
+    void Menu();
 
 protected:
 };

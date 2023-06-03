@@ -1,36 +1,37 @@
-#if ! defined ( USER_H )
+#if !defined(USER_H)
 #define USER_H
 
-#include <vector>
-#include <string>
-#include "Sensor.h"
 #include "Person.h"
+#include "Sensor.h"
+#include <string>
+#include <vector>
 
-class User : public Person{
+class User : public Person {
 public:
-  User();
+    User();
 
-  User(std::string id, int points = 0, bool is_trustworthy = true);
+    User(const std::string &id, int points = 0, bool is_trustworthy = true);
 
-  User(std::string login, std::string password, std::string id, int points = 0, bool is_trustworthy = true);
+    User(const std::string &login, const std::string &password,
+         const std::string &id, int points = 0, bool is_trustworthy = true);
 
-  void add_sensor(Sensor sensor);
+    void add_sensor(const Sensor &sensor);
 
-  // virtual bool Sign_up(std::string login, std::string password);
-  
-  std::string getId()const;
-  
-  std::vector<Sensor> getSensors()const;
+    // virtual bool Sign_up(std::string login, std::string password);
 
-  friend bool operator < (const User & unUser, const User & autreUser);
+    std::string getId() const;
+
+    std::vector<Sensor> getSensors() const;
+
+    friend bool operator<(const User &unUser, const User &autreUser);
 
 protected:
-  std::string id;
-  int points;
-  bool is_trustworthy;
-  std::vector<Sensor> sensors;
+    std::string id;
+    int points;
+    bool is_trustworthy;
+    std::vector<Sensor> sensors;
 };
 
-bool operator < (const User & unUser, const User & autreUser);
+bool operator<(const User &unUser, const User &autreUser);
 
 #endif

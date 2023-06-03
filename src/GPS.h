@@ -6,17 +6,12 @@ protected:
     double latitude;
     double longitude;
 
-public :
+public:
     GPS();
 
     GPS(double latitude, double longitude);
 
-    inline double get_latitude() const {
-        return latitude;
-    }
-    inline double get_longitude() const {
-        return longitude;
-    }
-    
+    inline double get_latitude() const { return latitude; }
+    inline double get_longitude() const { return longitude; }
 };
 #endif
