@@ -6,8 +6,8 @@ Provider::Provider() {}
 
 Provider::Provider(const string &id) : id(id) {}
 
-void Provider::add_cleaner(const Cleaner &cleaner) {
-    cleaners.push_back(cleaner);
+void Provider::add_cleaner(Cleaner &cleaner) {
+    cleaners[cleaner.get_id()] = &cleaner;
 }
 
 bool operator<(const Provider &unProvider, const Provider &autreProvider) {

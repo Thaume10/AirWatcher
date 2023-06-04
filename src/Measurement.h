@@ -3,13 +3,12 @@
 
 #include "Attribute.h"
 #include "Date.h"
-#include "Sensor.h"
 
 class Measurement {
 public:
     Measurement();
 
-    Measurement(double value, const Date &timestamp, const std::string &sensor);
+    Measurement(double value, const Date &timestamp);
 
     double get_value() const { return value; }
 
@@ -17,12 +16,9 @@ public:
 
     Attribute &get_attribute() { return attibute; }
 
-    Sensor get_sensor() const { return sensor; }
-
 protected:
     double value;
     Date timestamp;
     Attribute attibute;
-    Sensor sensor;
 };
 #endif

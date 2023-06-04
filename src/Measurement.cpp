@@ -2,6 +2,6 @@
 
 using namespace std;
 
-Measurement::Measurement(double value, const Date &timestamp,
-                         const string &sensor)
-    : value(value), timestamp(timestamp), sensor(sensor) {}
+Measurement::Measurement(double value, const Date &timestamp
+                         )
+    : value(value), timestamp(timestamp) {}

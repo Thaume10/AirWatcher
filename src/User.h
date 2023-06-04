@@ -1,3 +1,4 @@
+#include <unordered_map>
 #if !defined(USER_H)
 #define USER_H
 
@@ -15,13 +16,13 @@ public:
     User(const std::string &login, const std::string &password,
          const std::string &id, int points = 0, bool is_trustworthy = true);
 
-    void add_sensor(const Sensor &sensor);
+    void add_sensor(Sensor &sensor);
 
     // virtual bool sign_up(std::string login, std::string password);
 
     std::string get_id() const;
 
-    std::vector<Sensor> get_sensors() const;
+    std::unordered_map<std::string, Sensor *> get_sensors() const;
 
     friend bool operator<(const User &unUser, const User &autreUser);
 
@@ -29,7 +30,7 @@ protected:
     std::string id;
     int points;
     bool is_trustworthy;
-    std::vector<Sensor> sensors;
+    std::unordered_map<std::string, Sensor *> sensors;
 };
 
 bool operator<(const User &unUser, const User &autreUser);

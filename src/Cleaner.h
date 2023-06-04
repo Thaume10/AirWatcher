@@ -13,9 +13,10 @@ protected:
 public:
     std::vector<std::string> get_impact();
     Cleaner(const std::string &id);
+    Cleaner() {}
     void set_timestamp_start(Date date);
     void set_timestamp_stop(Date date);
-    Date get_timestamp_start();
-    Date get_timestamp_stop();
+    Date get_timestamp_start() const;
+    Date get_timestamp_stop() const;
 };
 #endif

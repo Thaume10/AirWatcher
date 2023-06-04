@@ -7,20 +7,21 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <unordered_map>
+#include <vector>
 
 using namespace std;
 
-vector<User> Data::users;
-vector<Sensor> Data::sensors;
-vector<Cleaner> Data::cleaners;
+unordered_map<string, User> Data::users;
+unordered_map<string, Sensor> Data::sensors;
+unordered_map<string, Cleaner> Data::cleaners;
 vector<Measurement> Data::measurements;
-vector<Provider> Data::providers;
+unordered_map<string, Provider> Data::providers;
 
 Data::Data() {}
 
 void Data::load_users_CSV() {
     // Users
-    set<User> userSet;
 
     ifstream fichier("data/users.csv");
     string user_id;
@@ -32,27 +33,17 @@ void Data::load_users_CSV() {
         fichier >> ws;
 
         User user(user_id);
-        Sensor sensor(sensor_id);
+        auto itSensor = sensors.find(sensor_id);
 
-        auto it = find_if(sensors.begin(), sensors.end(), [&](const Sensor &s) {
-            return s.get_id() == sensor_id;
-        });
+        auto itUser = users.find(user_id);
 
-        if (it != sensors.end()) {
-            GPS pos = it->get_coord();
-            sensor.set_coord(pos);
+        if (itUser != users.end()) {
+            itUser->second.add_sensor(itSensor->second);
+        } else {
+            user.add_sensor(itSensor->second);
+            users[user_id] = user;
         }
-
-        set<User>::iterator itUser = userSet.find(user);
-        if (itUser != userSet.end()) {
-            user = *itUser;
-        }
-        user.add_sensor(sensor);
-        userSet.erase(user);
-        userSet.insert(user);
     }
-    users.resize(userSet.size());
-    copy(userSet.begin(), userSet.end(), users.begin());
 }
 
 void Data::load_sensors_CSV() {
@@ -77,7 +68,7 @@ void Data::load_sensors_CSV() {
         GPS pos(latitude, longitude);
 
         sensor.set_coord(pos);
-        sensors.push_back(sensor);
+        sensors[sensor_id] = sensor;
     }
 }
 
@@ -111,7 +102,7 @@ void Data::load_cleaners_CSV() {
         cleaner.set_timestamp_start(dateDebut);
         cleaner.set_timestamp_stop(dateFin);
         cleaner.set_coord(pos);
-        cleaners.push_back(cleaner);
+        cleaners[cleaner_id] = cleaner;
     }
 }
 
@@ -133,15 +124,15 @@ void Data::load_measurements_CSV() {
         fichier >> ws;
         Date date;
         date.string_to_time(datestr);
-        Measurement m(val, date, sensorid);
+        Measurement m(val, date);
         m.get_attribute().set_id(attribute_id);
         measurements.push_back(m);
+        sensors[sensorid].add_measurement(measurements.back());
     }
 }
 
 void Data::load_providers_CSV() {
     // Provider
-    set<Provider> providerSet;
 
     ifstream fichier("data/providers.csv");
     string provider_id;
@@ -153,49 +144,37 @@ void Data::load_providers_CSV() {
         fichier >> ws;
 
         Provider provider(provider_id);
-        Cleaner cleaner(cleaner_id);
 
-        auto it =
-            find_if(cleaners.begin(), cleaners.end(),
-                    [&](const Cleaner &c) { return c.get_id() == cleaner_id; });
+        auto itCleaner =
+            cleaners.find(cleaner_id);
 
-        if (it != cleaners.end()) {
-            GPS pos = it->get_coord();
-            cleaner.set_coord(pos);
-            cleaner.set_timestamp_start(it->get_timestamp_start());
-            cleaner.set_timestamp_stop(it->get_timestamp_stop());
+        auto itProvider = providers.find(provider_id);
+        if (itProvider != providers.end()) {
+            provider.add_cleaner(itCleaner->second);
+        } else {
+            provider.add_cleaner(itCleaner->second);
+            providers[provider_id] = provider;
         }
-
-        set<Provider>::iterator itProvider = providerSet.find(provider);
-        if (itProvider != providerSet.end()) {
-            provider = *itProvider;
-        }
-        provider.add_cleaner(cleaner);
-        providerSet.erase(provider);
-        providerSet.insert(provider);
     }
-
-    providers.resize(providerSet.size());
-    copy(providerSet.begin(), providerSet.end(), providers.begin());
 }
 
 void Data::load_CSV() {
     load_sensors_CSV();
-    load_measurements_CSV();
     load_cleaners_CSV();
+    load_measurements_CSV();
     load_providers_CSV();
     load_users_CSV();
 }
 
-vector<User> &Data::get_users() { return Data::users; }
+unordered_map<string, User> &Data::get_users() { return users; }
 
-vector<Sensor> &Data::get_sensors() { return Data::sensors; }
+unordered_map<string, Sensor> &Data::get_sensors() { return Data::sensors; }
 
-vector<Cleaner> &Data::get_cleaners() { return Data::cleaners; }
+unordered_map<string, Cleaner> &Data::get_cleaners() { return Data::cleaners; }
 
 vector<Measurement> &Data::get_measurements() { return measurements; }
 
-vector<Provider> &Data::get_providers() { return providers; }
+unordered_map<string, Provider> &Data::get_providers() { return providers; }
 
 bool Data::comparer_par_double(const pair<Sensor, double> &paire1,
                                const pair<Sensor, double> &paire2) {
@@ -204,21 +183,20 @@ bool Data::comparer_par_double(const pair<Sensor, double> &paire1,
 
 vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
     vector<pair<Sensor, double>> top5;
-    vector<Sensor>::iterator itDebut = sensors.begin();
-    vector<Sensor>::iterator itFin = sensors.end();
-    for (auto it = itDebut; it != itFin; ++it) {
+
+    for (const auto &it : sensors) {
         if (top5.size() < 5) {
-            if (!it->get_is_malfunctionning()) {
+            if (!it.second.get_is_malfunctionning()) {
                 top5.push_back(
-                    make_pair(*it, calculer_distance(coord, it->get_coord())));
+                    make_pair(it.second, calculer_distance(coord, it.second.get_coord())));
             }
         } else {
             sort(top5.begin(), top5.end(), comparer_par_double);
-            if (!it->get_is_malfunctionning() &&
-                top5[0].second > calculer_distance(coord, it->get_coord())) {
+            if (!it.second.get_is_malfunctionning() &&
+                top5[0].second > calculer_distance(coord, it.second.get_coord())) {
                 top5.erase(top5.begin());
                 top5.push_back(
-                    make_pair(*it, calculer_distance(coord, it->get_coord())));
+                    make_pair(it.second, calculer_distance(coord, it.second.get_coord())));
             }
         }
     }
@@ -235,13 +213,7 @@ double Data::calculer_distance(const GPS &coord1, const GPS &coord2) {
 }
 
 vector<Measurement> Data::get_measurements_sensor(const string &sensor_id) {
-    vector<Measurement> list;
-    for (const Measurement &element : get_measurements()) {
-        if (element.get_sensor().get_id() == sensor_id) {
-            list.push_back(element);
-        }
-    }
-    return list;
+    return sensors[sensor_id].get_measurements();
 }
 
 vector<Measurement> Data::get_measures_of_sensor(const string &sensor_id,
@@ -249,12 +221,10 @@ vector<Measurement> Data::get_measures_of_sensor(const string &sensor_id,
                                                  const Date &end,
                                                  Date &proche) {
     vector<Measurement> result;
-    vector<Measurement> list = get_measurements_sensor(sensor_id);
-    vector<Measurement>::iterator itDebut = list.begin();
-    vector<Measurement>::iterator itFin = list.end();
-    for (auto it = itDebut; it != itFin; ++it) {
-        if (end > it->get_timestamp() && it->get_timestamp() > start) {
-            result.push_back(*it);
+    vector<Measurement> measures = get_measurements_sensor(sensor_id);
+    for (const auto &measure : measures) {
+        if (end > measure.get_timestamp() && measure.get_timestamp() > start) {
+            result.push_back(measure);
         }
     }
     if (result.empty()) {
@@ -265,18 +235,18 @@ vector<Measurement> Data::get_measures_of_sensor(const string &sensor_id,
         minap.string_to_time("2100-01-01  14:00:00");
         Date minav;
         minav.string_to_time("0001-01-01   14:00:00");
-        for (auto it = itDebut; it != itFin; ++it) {
+        for (const auto &measure : measures) {
             Date diffBefore = start - minav;
             Date diffAfter = minap - end;
-            if (it->get_timestamp() > end) {
-                Date temp = it->get_timestamp() - end;
+            if (measure.get_timestamp() > end) {
+                Date temp = measure.get_timestamp() - end;
                 if ((temp < diffAfter)) {
-                    minap = it->get_timestamp();
+                    minap = measure.get_timestamp();
                 }
-            } else if (it->get_timestamp() < start) {
-                Date temp = start - it->get_timestamp();
+            } else if (measure.get_timestamp() < start) {
+                Date temp = start - measure.get_timestamp();
                 if (temp < diffBefore) {
-                    minav = it->get_timestamp();
+                    minav = measure.get_timestamp();
                 }
             }
         }
@@ -289,9 +259,9 @@ vector<Measurement> Data::get_measures_of_sensor(const string &sensor_id,
             min = minav;
         }
         proche = min;
-        for (auto it = itDebut; it != itFin; ++it) {
-            if (it->get_timestamp().to_string() == min.to_string()) {
-                result.push_back(*it);
+        for (const auto &measure : measures) {
+            if (measure.get_timestamp().to_string() == min.to_string()) {
+                result.push_back(measure);
             }
         }
     }
@@ -299,13 +269,9 @@ vector<Measurement> Data::get_measures_of_sensor(const string &sensor_id,
 }
 
 Sensor Data::get_sensor_by_id(const string &sensor_id) {
-    vector<Sensor>::iterator itDebut = sensors.begin();
-    vector<Sensor>::iterator itFin = sensors.end();
-    while (itDebut != itFin) {
-        if (itDebut->get_id() == sensor_id) {
-            return *itDebut;
-        }
-        ++itDebut;
-    }
+    auto it = sensors.find(sensor_id);
+    if (it != sensors.end()) {
+        return it->second;
+    } 
     return Sensor("");
 }

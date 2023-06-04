@@ -1,6 +1,7 @@
 #if !defined(SENSOR_H)
 #define SENSOR_H
 
+#include "Measurement.h"
 #include "Date.h"
 #include "Device.h"
 #include <chrono>
@@ -26,14 +27,19 @@ public:
 
     void set_is_malfunctionning(bool malfunctionning);
 
-    // void add_measurement(Measurement measurement);
+    void add_measurement(Measurement &measurement) {
+        measurements.push_back(measurement);
+    }
 
     friend bool operator<(const Sensor &unSensor, const Sensor &autreSensor);
 
     bool analyzeSensor(const Sensor &sensor, const Date &start_date);
 
+    std::vector<Measurement> get_measurements() const { return measurements;}
+
 protected:
     bool is_malfunctionning;
+    std::vector<Measurement> measurements;
     std::vector<double> calculate_mean(const Sensor &sensor,
                                        const Date &start_date,
                                        const Date &end_date);

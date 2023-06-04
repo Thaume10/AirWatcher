@@ -1,6 +1,7 @@
 #include "Data.h"
 #include "User.h"
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 
 void unit_tests_precise_position() {
@@ -123,39 +124,33 @@ int main() {
     Data::load_CSV();
 
     cout << "----------------USERS--------------" << endl;
-    vector<User> users = Data::get_users();
-    for (vector<User>::iterator itUsers = users.begin(); itUsers != users.end();
-         ++itUsers) {
-        cout << "User : " << itUsers->get_id() << endl;
-        vector<Sensor> sensors = itUsers->get_sensors();
-        for (vector<Sensor>::iterator itSensor = sensors.begin();
-             itSensor != sensors.end(); ++itSensor) {
-            cout << "\tSensor : " << itSensor->get_id()
-                 << " coordonnees : " << itSensor->get_coord().get_latitude()
-                 << " : " << itSensor->get_coord().get_longitude() << endl;
+    for (const auto & user : Data::get_users()) {
+        cout << "User : " << user.second.get_id() << endl;
+        unordered_map<string, Sensor *> sensors = user.second.get_sensors();
+        for (const auto &sensor : sensors) {
+            cout << "\tSensor : " << sensor.second->get_id()
+                 << " coordonnees : " << sensor.second->get_coord().get_latitude()
+                 << " : " << sensor.second->get_coord().get_longitude() << endl;
         }
     }
 
     cout << "----------------SENSORS--------------" << endl;
-    vector<Sensor> sensors = Data::get_sensors();
+
     /*
-    for (vector<Sensor>::iterator itSensor = sensors.begin();
-         itSensor != sensors.end(); ++itSensor) {
-        cout << "Sensor : " << itSensor->get_id() << " coordonnees : " <<
-        itSensor->get_coord().get_latitude() << " " <<
-        itSensor->get_coord().get_longitude() << endl;
+    for (const auto &sensor : Data::get_sensors()) {
+        cout << "Sensor : " << sensor.second.get_id() << " coordonnees : " <<
+        sensor.second.get_coord().get_latitude() << " " <<
+        sensor.second.get_coord().get_longitude() << endl;
     }
     */
 
     cout << "----------------CLEANERS--------------" << endl;
-    vector<Cleaner> cleaners = Data::get_cleaners();
-    for (vector<Cleaner>::iterator itCleaners = cleaners.begin();
-         itCleaners != cleaners.end(); ++itCleaners) {
-        cout << "Cleaner : " << itCleaners->get_id()
-             << " coord : " << itCleaners->get_coord().get_latitude() << " : "
-             << itCleaners->get_coord().get_longitude()
-             << " Debut : " << itCleaners->get_timestamp_start().to_string()
-             << " Fin : " << itCleaners->get_timestamp_stop().to_string()
+    for (const auto &cleaner : Data::get_cleaners()) {
+        cout << "Cleaner : " << cleaner.second.get_id()
+             << " coord : " << cleaner.second.get_coord().get_latitude() << " : "
+             << cleaner.second.get_coord().get_longitude()
+             << " Debut : " << cleaner.second.get_timestamp_start().to_string()
+             << " Fin : " << cleaner.second.get_timestamp_stop().to_string()
              << endl;
     }
 
@@ -171,18 +166,15 @@ int main() {
     */
 
     cout << "----------------PROVIDERS--------------" << endl;
-    vector<Provider> providers = Data::get_providers();
-    for (vector<Provider>::iterator itProvider = providers.begin();
-         itProvider != providers.end(); ++itProvider) {
-        cout << "Provider id : " << itProvider->get_id() << endl;
-        cleaners = itProvider->get_cleaners();
-        for (vector<Cleaner>::iterator itCleaner = cleaners.begin();
-             itCleaner != cleaners.end(); ++itCleaner) {
-            cout << "Cleaner : " << itCleaner->get_id()
-                 << " coord : " << itCleaner->get_coord().get_latitude()
-                 << " : " << itCleaner->get_coord().get_longitude()
-                 << " Debut : " << itCleaner->get_timestamp_start().to_string()
-                 << " Fin : " << itCleaner->get_timestamp_stop().to_string()
+    for (const auto &itProvider : Data::get_providers()) {
+        cout << "Provider id : " << itProvider.second.get_id() << endl;
+        auto cleaners = itProvider.second.get_cleaners();
+        for (const auto &itCleaner : cleaners) {
+            cout << "Cleaner : " << itCleaner.second->get_id()
+                 << " coord : " << itCleaner.second->get_coord().get_latitude()
+                 << " : " << itCleaner.second->get_coord().get_longitude()
+                 << " Debut : " << itCleaner.second->get_timestamp_start().to_string()
+                 << " Fin : " << itCleaner.second->get_timestamp_stop().to_string()
                  << endl;
         }
     }

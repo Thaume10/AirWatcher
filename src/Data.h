@@ -1,3 +1,4 @@
+#include <unordered_map>
 #if !defined(DATA_H)
 #define DATA_H
 
@@ -38,18 +39,18 @@ public:
     static std::vector<std::string>
     get_aircleaner_impact(const std::string &cleaner_id);
 
-    static std::vector<User> &get_users();
+    static std::unordered_map<std::string, User> &get_users();
 
-    static std::vector<Sensor> &get_sensors();
+    static std::unordered_map<std::string, Sensor> &get_sensors();
 
-    static std::vector<Cleaner> &get_cleaners();
+    static std::unordered_map<std::string, Cleaner> &get_cleaners();
 
     static std::vector<Measurement> &get_measurements();
 
     static std::vector<Measurement>
     get_measurements_sensor(const std::string &sensor_id);
 
-    static std::vector<Provider> &get_providers();
+    static std::unordered_map<std::string, Provider> &get_providers();
 
     static double calculer_distance(const GPS &coord1, const GPS &coord2);
 
@@ -59,14 +60,14 @@ public:
                                     const std::pair<Sensor, double> &paire2);
 
 protected:
-    static std::vector<User> users;
-    static std::vector<Provider> providers;
-    static std::vector<GovernmentMember> government_members;
-    static std::vector<Admin> admins;
+    static std::unordered_map<std::string, User> users;
+    static std::unordered_map<std::string, Provider> providers;
+    static std::unordered_map<std::string, GovernmentMember> government_members;
+    static std::unordered_map<std::string, Admin> admins;
     static std::vector<Measurement> measurements;
-    static std::vector<Sensor> sensors;
-    static std::vector<Cleaner> cleaners;
-    static std::vector<Attribute> attributes;
+    static std::unordered_map<std::string, Sensor> sensors;
+    static std::unordered_map<std::string, Cleaner> cleaners;
+    static std::unordered_map<std::string, Attribute> attributes;
 
     static void load_users_CSV();
 
