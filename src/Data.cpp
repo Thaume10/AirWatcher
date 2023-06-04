@@ -180,11 +180,11 @@ void Data::load_providers_CSV() {
 }
 
 void Data::load_CSV() {
-    load_users_CSV();
     load_sensors_CSV();
+    load_measurements_CSV();
     load_cleaners_CSV();
     load_providers_CSV();
-    load_measurements_CSV();
+    load_users_CSV();
 }
 
 vector<User> &Data::get_users() { return Data::users; }
