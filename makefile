@@ -4,7 +4,7 @@ EXE = airwatcher
 SRC = $(shell find $(SRCDIR) -name *.cpp)
 OBJ = ${SRC:$(SRCDIR)/%.cpp=$(BUILDDIR)/%.o}
 CC = g++
-CFLAGS = -ansi -pedantic -Wall -std=c++11
+CFLAGS = -ansi -pedantic -Wall -std=c++11 -O3
 DEBUGFLAGS = -DDEBUG -g
 LDFLAGS = 
 RM = rm

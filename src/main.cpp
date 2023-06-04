@@ -138,32 +138,36 @@ int main() {
 
     cout << "----------------SENSORS--------------" << endl;
     vector<Sensor> sensors = Data::get_sensors();
+    /*
     for (vector<Sensor>::iterator itSensor = sensors.begin();
          itSensor != sensors.end(); ++itSensor) {
-        // cout << "Sensor : " << itSensor->get_id() << " coordonnees : " <<
-        // itSensor->get_coord().get_latitude() << " " <<
-        // itSensor->get_coord().get_longitude() << endl;
+        cout << "Sensor : " << itSensor->get_id() << " coordonnees : " <<
+        itSensor->get_coord().get_latitude() << " " <<
+        itSensor->get_coord().get_longitude() << endl;
     }
+    */
 
     cout << "----------------CLEANERS--------------" << endl;
     vector<Cleaner> cleaners = Data::get_cleaners();
     for (vector<Cleaner>::iterator itCleaners = cleaners.begin();
          itCleaners != cleaners.end(); ++itCleaners) {
-        // cout << "Cleaner : " << itCleaners->get_id() << " coord : " <<
-        // itCleaners->get_coord().get_latitude() << " : " <<
-        // itCleaners->get_coord().get_longitude() << " Debut : " <<
-        // itCleaners->get_timestamp_start().to_string() <<  " Fin : " <<
-        // itCleaners->get_timestamp_stop().to_string() << endl;
+        cout << "Cleaner : " << itCleaners->get_id() << " coord : " <<
+        itCleaners->get_coord().get_latitude() << " : " <<
+        itCleaners->get_coord().get_longitude() << " Debut : " <<
+        itCleaners->get_timestamp_start().to_string() <<  " Fin : " <<
+        itCleaners->get_timestamp_stop().to_string() << endl;
     }
 
     cout << "----------------MEASUREMENTS--------------" << endl;
     vector<Measurement> measurements = Data::get_measurements();
+    /*
     for (vector<Measurement>::iterator itMeasurements = measurements.begin();
          itMeasurements != measurements.end(); ++itMeasurements) {
-        // cout << "Measurement value : " << itMeasurements->get_value() << "
-        // timestamp : " << itMeasurements->get_timestamp().to_string() << "
-        // attribute : " << itMeasurements->get_attribute().get_id() << endl;
+        cout << "Measurement value : " << itMeasurements->get_value() << "
+        timestamp : " << itMeasurements->get_timestamp().to_string() << "
+        attribute : " << itMeasurements->get_attribute().get_id() << endl;
     }
+    */
 
     cout << "----------------PROVIDERS--------------" << endl;
     vector<Provider> providers = Data::get_providers();
@@ -181,9 +185,10 @@ int main() {
                  << endl;
         }
     }
-    cout << "--------------TEST PRECISE POSITION--------------\n";
+
+    cout << "\n--------------TEST PRECISE POSITION--------------\n";
     unit_tests_precise_position();
-    cout << "--------------TEST ANALYZE SENSOR--------------\n";
+    cout << "\n--------------TEST ANALYZE SENSOR--------------\n";
     unit_tests_analyze_sensor();
     return 0;
 }
