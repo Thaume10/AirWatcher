@@ -35,11 +35,11 @@ public:
 protected:
     bool is_malfunctionning;
     std::vector<double> calculate_mean(const Sensor &sensor,
-            const Date &start_date,
-            const Date &end_date);
+                                       const Date &start_date,
+                                       const Date &end_date);
     std::vector<double> calculate_mean_surroundings(const GPS &coord,
-            const Date &start_date,
-            const Date &end_date);
+                                                    const Date &start_date,
+                                                    const Date &end_date);
 };
 
 bool operator<(const Sensor &unSensor, const Sensor &autreSensor);

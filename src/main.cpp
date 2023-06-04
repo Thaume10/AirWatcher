@@ -45,7 +45,7 @@ void unit_tests_precise_position() {
     cout << endl;
 
     start.string_to_time("2019-01-09 14:00:00");
-    end.string_to_time("2019-01-09  10:00:00");
+    end.string_to_time("2019-01-09 10:00:00");
     cout << endl << endl;
     cout << "Unit test invalide  :" << endl;
     startTime = chrono::high_resolution_clock::now();

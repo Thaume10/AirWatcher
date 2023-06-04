@@ -66,7 +66,7 @@ public:
     static Sensor get_sensor_by_id(const std::string &sensor_id);
 
     static bool comparer_par_double(const std::pair<Sensor, double> &paire1,
-                                  const std::pair<Sensor, double> &paire2);
+                                    const std::pair<Sensor, double> &paire2);
 
 protected:
     static std::vector<User> users;
