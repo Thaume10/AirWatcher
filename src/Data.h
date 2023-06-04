@@ -24,16 +24,6 @@ public:
 
     static void load_CSV();
 
-    static void load_users_CSV();
-
-    static void load_sensors_CSV();
-
-    static void load_cleaners_CSV();
-
-    static void load_measurements_CSV();
-
-    static void load_providers_CSV();
-
     static std::vector<Measurement>
     retrieve_data_around_aircleaner(const std::string &id, const Date &start,
                                     const Date &end);
@@ -77,5 +67,15 @@ protected:
     static std::vector<Sensor> sensors;
     static std::vector<Cleaner> cleaners;
     static std::vector<Attribute> attributes;
+
+    static void load_users_CSV();
+
+    static void load_sensors_CSV();
+
+    static void load_cleaners_CSV();
+
+    static void load_measurements_CSV();
+
+    static void load_providers_CSV();
 };
 #endif

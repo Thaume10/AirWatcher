@@ -151,11 +151,12 @@ int main() {
     vector<Cleaner> cleaners = Data::get_cleaners();
     for (vector<Cleaner>::iterator itCleaners = cleaners.begin();
          itCleaners != cleaners.end(); ++itCleaners) {
-        cout << "Cleaner : " << itCleaners->get_id() << " coord : " <<
-        itCleaners->get_coord().get_latitude() << " : " <<
-        itCleaners->get_coord().get_longitude() << " Debut : " <<
-        itCleaners->get_timestamp_start().to_string() <<  " Fin : " <<
-        itCleaners->get_timestamp_stop().to_string() << endl;
+        cout << "Cleaner : " << itCleaners->get_id()
+             << " coord : " << itCleaners->get_coord().get_latitude() << " : "
+             << itCleaners->get_coord().get_longitude()
+             << " Debut : " << itCleaners->get_timestamp_start().to_string()
+             << " Fin : " << itCleaners->get_timestamp_stop().to_string()
+             << endl;
     }
 
     cout << "----------------MEASUREMENTS--------------" << endl;
