@@ -9,7 +9,7 @@ User::User() {}
 User::User(const string &id, int points, bool is_trustworthy)
     : id(id), points(points), is_trustworthy(is_trustworthy) {}
 
-// bool User::Sign_up(string login, string password) {
+// bool User::sign_up(string login, string password) {
 //     this->login = login;
 //     this->password = password;
 //     // TODO: vérifier unique
@@ -27,10 +27,10 @@ User::User(const string &id, int points, bool is_trustworthy)
 
 void User::add_sensor(const Sensor &sensor) { sensors.push_back(sensor); }
 
-string User::getId() const { return id; }
+string User::get_id() const { return id; }
 
-vector<Sensor> User::getSensors() const { return sensors; }
+vector<Sensor> User::get_sensors() const { return sensors; }
 
 bool operator<(const User &unUser, const User &autreUser) {
-    return (unUser.getId() < autreUser.getId());
+    return (unUser.get_id() < autreUser.get_id());
 }

@@ -8,13 +8,13 @@ using namespace std;
 
 Date::Date() : time(std::time(nullptr)) {}
 
-string Date::To_string() {
+string Date::to_string() {
     ostringstream oss;
     oss << put_time(localtime(&time), "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
 
-void Date::String_to_time(const string &time) {
+void Date::string_to_time(const string &time) {
     tm dt{};
     istringstream ss{time};
     ss >> get_time(&dt, "%Y-%m-%d %H:%M:%S");

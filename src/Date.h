@@ -10,8 +10,8 @@ protected:
 
 public:
     Date();
-    std::string To_string();
-    void String_to_time(const std::string &time);
+    std::string to_string();
+    void string_to_time(const std::string &time);
 
     bool operator<(const Date &other) const { return time < other.time; }
 

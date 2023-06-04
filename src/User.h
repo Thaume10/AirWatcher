@@ -17,11 +17,11 @@ public:
 
     void add_sensor(const Sensor &sensor);
 
-    // virtual bool Sign_up(std::string login, std::string password);
+    // virtual bool sign_up(std::string login, std::string password);
 
-    std::string getId() const;
+    std::string get_id() const;
 
-    std::vector<Sensor> getSensors() const;
+    std::vector<Sensor> get_sensors() const;
 
     friend bool operator<(const User &unUser, const User &autreUser);
 

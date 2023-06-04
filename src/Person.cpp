@@ -6,7 +6,7 @@ using namespace std;
 
 Person::Person() {}
 
-vector<double> Person::Stats_precise_position(const GPS &position,
+vector<double> Person::stats_precise_position(const GPS &position,
                                               const Date &start,
                                               const Date &end, Date &proche) {
     if (start > end) {

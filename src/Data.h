@@ -22,7 +22,7 @@ class Data {
 public:
     Data();
 
-    static void Load_CSV();
+    static void load_CSV();
 
     static std::vector<Measurement>
     retrieve_data_around_aircleaner(const std::string &id, const Date &start,
@@ -32,29 +32,30 @@ public:
     get_five_nearest_sensors(const GPS &coord);
 
     static std::vector<Measurement>
-    get_measures_of_sensor(const std::string &sensorId, const Date &start,
+    get_measures_of_sensor(const std::string &sensor_id, const Date &start,
                            const Date &end, Date &proche);
 
     static std::vector<std::string>
     get_aircleaner_impact(const std::string &cleaner_id);
 
-    static std::vector<User> &getUsers();
+    static std::vector<User> &get_users();
 
-    static std::vector<Sensor> &getSensors();
+    static std::vector<Sensor> &get_sensors();
 
-    static std::vector<Cleaner> &getCleaners();
+    static std::vector<Cleaner> &get_cleaners();
 
-    static std::vector<Measurement> &getMeasurements();
+    static std::vector<Measurement> &get_measurements();
 
     static std::vector<Measurement>
-    get_measurementsSensor(const std::string &sensorId);
-    static std::vector<Provider> &getProviders();
+    get_measurements_sensor(const std::string &sensor_id);
 
-    static double calculerDistance(const GPS &coord1, const GPS &coord2);
+    static std::vector<Provider> &get_providers();
 
-    static Sensor getSensorById(const std::string &sensorId);
+    static double calculer_distance(const GPS &coord1, const GPS &coord2);
 
-    static bool comparerParDouble(const std::pair<Sensor, double> &paire1,
+    static Sensor get_sensor_by_id(const std::string &sensor_id);
+
+    static bool comparer_par_double(const std::pair<Sensor, double> &paire1,
                                   const std::pair<Sensor, double> &paire2);
 
 protected:
