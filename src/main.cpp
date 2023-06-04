@@ -181,7 +181,9 @@ int main() {
                  << endl;
         }
     }
+    cout << "--------------TEST PRECISE POSITION--------------\n";
     unit_tests_precise_position();
+    cout << "--------------TEST ANALYZE SENSOR--------------\n";
     unit_tests_analyze_sensor();
     return 0;
 }

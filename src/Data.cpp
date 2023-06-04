@@ -18,62 +18,13 @@ vector<Provider> Data::providers;
 
 Data::Data() {}
 
-void Data::load_CSV() {
-    ifstream fichier;
-
-    // Sensors
-    string temp;
-    string sensor_id;
-    double latitude = 0;
-    double longitude = 0;
-    fichier.open("data/sensors.csv");
-
-    while (!fichier.eof()) {
-        getline(fichier, sensor_id, ';');
-        fichier >> latitude;
-        getline(fichier, temp, ';');
-        fichier >> longitude;
-        getline(fichier, temp, ';');
-        fichier >> ws;
-
-        Sensor sensor(sensor_id);
-
-        GPS pos(latitude, longitude);
-
-        sensor.set_coord(pos);
-        sensors.push_back(sensor);
-    }
-
-    fichier.close();
-
-    // Measurements
-    fichier.open("data/measurements.csv");
-
-    while (!fichier.eof()) {
-        string datestr;
-        string sensorid;
-        string attribute_id;
-        double val = 0;
-        getline(fichier, datestr, ';');
-        getline(fichier, sensorid, ';');
-        getline(fichier, attribute_id, ';');
-        fichier >> val;
-        getline(fichier, temp, ';');
-        fichier >> ws;
-        Date date;
-        date.string_to_time(datestr);
-        Measurement m(val, date, sensorid);
-        m.get_attribute().set_id(attribute_id);
-        measurements.push_back(m);
-    }
-
-    fichier.close();
-
+void Data::load_users_CSV() {
     // Users
     set<User> userSet;
 
-    fichier.open("data/users.csv");
+    ifstream fichier("data/users.csv");
     string user_id;
+    string sensor_id;
 
     while (!fichier.eof()) {
         getline(fichier, user_id, ';');
@@ -100,13 +51,46 @@ void Data::load_CSV() {
         userSet.erase(user);
         userSet.insert(user);
     }
-    fichier.close();
+    users.resize(userSet.size());
+    copy(userSet.begin(), userSet.end(), users.begin());
+}
 
+void Data::load_sensors_CSV() {
+    ifstream fichier("data/sensors.csv");
+
+    // Sensors
+    string temp;
+    string sensor_id;
+    double latitude = 0;
+    double longitude = 0;
+
+    while (!fichier.eof()) {
+        getline(fichier, sensor_id, ';');
+        fichier >> latitude;
+        getline(fichier, temp, ';');
+        fichier >> longitude;
+        getline(fichier, temp, ';');
+        fichier >> ws;
+
+        Sensor sensor(sensor_id);
+
+        GPS pos(latitude, longitude);
+
+        sensor.set_coord(pos);
+        sensors.push_back(sensor);
+    }
+}
+
+void Data::load_cleaners_CSV() {
     // Cleaners
-    fichier.open("data/cleaners.csv");
+    ifstream fichier("data/cleaners.csv");
     string cleaner_id;
     string debut;
     string fin;
+    double latitude = 0;
+    double longitude = 0;
+    string temp;
+
     while (!fichier.eof()) {
         getline(fichier, cleaner_id, ';');
         fichier >> latitude;
@@ -129,20 +113,46 @@ void Data::load_CSV() {
         cleaner.set_coord(pos);
         cleaners.push_back(cleaner);
     }
-    fichier.close();
+}
 
+void Data::load_measurements_CSV() {
+    // Measurements
+    ifstream fichier("data/measurements.csv");
+    string temp;
+
+    while (!fichier.eof()) {
+        string datestr;
+        string sensorid;
+        string attribute_id;
+        double val = 0;
+        getline(fichier, datestr, ';');
+        getline(fichier, sensorid, ';');
+        getline(fichier, attribute_id, ';');
+        fichier >> val;
+        getline(fichier, temp, ';');
+        fichier >> ws;
+        Date date;
+        date.string_to_time(datestr);
+        Measurement m(val, date, sensorid);
+        m.get_attribute().set_id(attribute_id);
+        measurements.push_back(m);
+    }
+}
+
+void Data::load_providers_CSV() {
     // Provider
     set<Provider> providerSet;
 
-    fichier.open("data/providers.csv");
+    ifstream fichier("data/providers.csv");
     string provider_id;
+    string cleaner_id;
 
     while (!fichier.eof()) {
         getline(fichier, provider_id, ';');
         getline(fichier, cleaner_id, ';');
         fichier >> ws;
 
-        Provider provider(user_id);
+        Provider provider(provider_id);
         Cleaner cleaner(cleaner_id);
 
         auto it =
@@ -164,12 +174,17 @@ void Data::load_CSV() {
         providerSet.erase(provider);
         providerSet.insert(provider);
     }
-    fichier.close();
 
-    users.resize(userSet.size());
-    copy(userSet.begin(), userSet.end(), users.begin());
     providers.resize(providerSet.size());
     copy(providerSet.begin(), providerSet.end(), providers.begin());
+}
+
+void Data::load_CSV() {
+    load_users_CSV();
+    load_sensors_CSV();
+    load_cleaners_CSV();
+    load_providers_CSV();
+    load_measurements_CSV();
 }
 
 vector<User> &Data::get_users() { return Data::users; }
@@ -183,7 +198,7 @@ vector<Measurement> &Data::get_measurements() { return measurements; }
 vector<Provider> &Data::get_providers() { return providers; }
 
 bool Data::comparer_par_double(const pair<Sensor, double> &paire1,
-                             const pair<Sensor, double> &paire2) {
+                               const pair<Sensor, double> &paire2) {
     return paire1.second > paire2.second;
 }
 
