@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void unitTestsPrecisePosition() {
+void unit_tests_precise_position() {
     User u;
     Date start;
     Date end;
@@ -83,7 +83,7 @@ void unitTestsPrecisePosition() {
     cout << endl;
 }
 
-void unitTestsAnalyzeSensor() {
+void unit_tests_analyze_sensor() {
     Sensor sensor1("Sensor5");
     Date start_date;
     Date measure_date = start_date;
@@ -181,7 +181,7 @@ int main() {
                  << endl;
         }
     }
-    unitTestsPrecisePosition();
-    unitTestsAnalyzeSensor();
+    unit_tests_precise_position();
+    unit_tests_analyze_sensor();
     return 0;
 }
