@@ -21,7 +21,9 @@ unordered_map<string, Attribute> Data::attributes;
 Data::Data() {}
 
 void Data::load_users_CSV() {
-    // Users
+    // On créer un ifstream, puis on boucle sur le fichier tant qu'on a
+    // pas atteint la fin, on met chacunes des valeurs dans un objet User
+    // qu'on place dans l'unordered_map users, avec comme clé le user_id
 
     ifstream fichier("data/users.csv");
     string user_id;
@@ -47,7 +49,6 @@ void Data::load_users_CSV() {
 }
 
 void Data::load_attributes_CSV() {
-    // Users
 
     ifstream fichier("data/attributes.csv");
     string attribute_id;
@@ -68,7 +69,6 @@ void Data::load_attributes_CSV() {
 void Data::load_sensors_CSV() {
     ifstream fichier("data/sensors.csv");
 
-    // Sensors
     string temp;
     string sensor_id;
     double latitude = 0;
@@ -92,7 +92,6 @@ void Data::load_sensors_CSV() {
 }
 
 void Data::load_cleaners_CSV() {
-    // Cleaners
     ifstream fichier("data/cleaners.csv");
     string cleaner_id;
     string debut;
@@ -126,7 +125,6 @@ void Data::load_cleaners_CSV() {
 }
 
 void Data::load_measurements_CSV() {
-    // Measurements
     ifstream fichier("data/measurements.csv");
     string temp;
 
@@ -151,7 +149,6 @@ void Data::load_measurements_CSV() {
 }
 
 void Data::load_providers_CSV() {
-    // Provider
 
     ifstream fichier("data/providers.csv");
     string provider_id;
