@@ -102,8 +102,8 @@ void unit_tests_analyze_sensor() {
     if (result) {
         cout << "\n---- Test validé ----\n" << endl;
     }
-    auto duration = endTime - startTime;
-    long elapsedTime = duration.count();
+    chrono::duration<double, milli> duration = endTime - startTime;
+    double elapsedTime = duration.count();
     cout << endl << "Temps écoulé : " << elapsedTime << " ms" << endl;
 
     // Test : Le capteur ne doit pas être fiable si une ou plusieurs mesures
