@@ -59,6 +59,15 @@ public:
     static bool comparer_par_double(const std::pair<Sensor, double> &paire1,
                                     const std::pair<Sensor, double> &paire2);
 
+    static std::vector<double> stats_precise_position(const GPS &position,
+                                                      const Date &start,
+                                                      const Date &end,
+                                                      Date &proche);
+    static std::vector<double> stats_circular_area(const GPS &position,
+                                                   const double &radius,
+                                                   const Date &start,
+                                                   const Date &end);
+
 protected:
     static std::unordered_map<std::string, User> users;
     static std::unordered_map<std::string, Provider> providers;

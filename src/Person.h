@@ -20,14 +20,6 @@ public:
 
     // virtual bool sign_up(std::string login, std::string password) = 0;
 
-    std::vector<double> stats_circular_area(const GPS &position,
-                                            const double &radius,
-                                            const Date &start, const Date &end);
-
-    std::vector<double> stats_precise_position(const GPS &position,
-                                               const Date &start,
-                                               const Date &end, Date &proche);
-
 protected:
     Person();
 

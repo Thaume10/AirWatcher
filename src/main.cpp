@@ -1,11 +1,11 @@
 #include "Data.h"
 #include "User.h"
+#include "Vue.h"
 #include <iostream>
 #include <unordered_map>
 using namespace std;
 
 void unit_tests_precise_position() {
-    User u;
     Date start;
     Date end;
     Date proche;
@@ -15,7 +15,7 @@ void unit_tests_precise_position() {
     cout << "Unit test valide avec sensors créés :" << endl;
     auto startTime = chrono::high_resolution_clock::now();
     vector<double> valid =
-        u.stats_precise_position(GPS(0.5, 0.5), start, end, proche);
+        Data::stats_precise_position(GPS(0.5, 0.5), start, end, proche);
     auto endTime = chrono::high_resolution_clock::now();
     chrono::duration<double, milli> duration = endTime - startTime;
     double elapsedTime = duration.count();
@@ -33,7 +33,7 @@ void unit_tests_precise_position() {
     cout << "Unit test valide avec jeux de donée :" << endl;
     startTime = chrono::high_resolution_clock::now();
     vector<double> valid2 =
-        u.stats_precise_position(GPS(44.2, 2.4), start, end, proche);
+        Data::stats_precise_position(GPS(44.2, 2.4), start, end, proche);
     endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
@@ -51,7 +51,7 @@ void unit_tests_precise_position() {
     cout << "Unit test invalide  :" << endl;
     startTime = chrono::high_resolution_clock::now();
     vector<double> valid3 =
-        u.stats_precise_position(GPS(44.2, 2.4), start, end, proche);
+        Data::stats_precise_position(GPS(44.2, 2.4), start, end, proche);
     endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
@@ -66,7 +66,7 @@ void unit_tests_precise_position() {
     cout << "Unit test valide dans un interval sans mesures :" << endl;
     startTime = chrono::high_resolution_clock::now();
     vector<double> valid4 =
-        u.stats_precise_position(GPS(0.5, 0.5), start, end, proche);
+        Data::stats_precise_position(GPS(0.5, 0.5), start, end, proche);
     endTime = chrono::high_resolution_clock::now();
     duration = endTime - startTime;
     elapsedTime = duration.count();
@@ -123,65 +123,35 @@ void unit_tests_analyze_sensor() {
 int main() {
     Data::load_CSV();
 
-    cout << "----------------USERS--------------" << endl;
-    for (const auto &user : Data::get_users()) {
-        cout << "User : " << user.second.get_id() << endl;
-        unordered_map<string, Sensor *> sensors = user.second.get_sensors();
-        for (const auto &sensor : sensors) {
-            cout << "\tSensor : " << sensor.second->get_id()
-                 << " coordonnees : "
-                 << sensor.second->get_coord().get_latitude() << " : "
-                 << sensor.second->get_coord().get_longitude() << endl;
+    while (!Vue::get_quitter()) {
+        Vue::print_menu();
+
+        int opt = 0;
+        Vue::entree_int_safe(opt);
+
+        switch (opt) {
+        case 0:
+            Vue::set_quitter(true);
+            break;
+
+        case 1:
+            unit_tests_precise_position();
+            break;
+
+        case 2:
+            unit_tests_analyze_sensor();
+            break;
+
+        case 3:
+            Vue::afficher_donnees();
+            break;
+
+        default:
+            Vue::print_error();
+            break;
         }
     }
 
-    cout << "----------------SENSORS--------------" << endl;
 
-    /*
-    for (const auto &sensor : Data::get_sensors()) {
-        cout << "Sensor : " << sensor.second.get_id() << " coordonnees : " <<
-        sensor.second.get_coord().get_latitude() << " " <<
-        sensor.second.get_coord().get_longitude() << endl;
-    }
-    */
-
-    cout << "----------------CLEANERS--------------" << endl;
-    for (const auto &cleaner : Data::get_cleaners()) {
-        cout << "Cleaner : " << cleaner.second.get_id()
-             << " coord : " << cleaner.second.get_coord().get_latitude()
-             << " : " << cleaner.second.get_coord().get_longitude()
-             << " Debut : " << cleaner.second.get_timestamp_start().to_string()
-             << " Fin : " << cleaner.second.get_timestamp_stop().to_string()
-             << endl;
-    }
-
-    cout << "----------------MEASUREMENTS--------------" << endl;
-    /*
-    for (const auto &measure : Data::get_measurements()) {
-        cout << "Measurement value : " << measure.get_value() << " timestamp : "
-    << measure.get_timestamp().to_string() << " attribute : " <<
-    measure.get_attribute_id() << endl;
-    }
-    */
-
-    cout << "----------------PROVIDERS--------------" << endl;
-    for (const auto &itProvider : Data::get_providers()) {
-        cout << "Provider id : " << itProvider.second.get_id() << endl;
-        auto cleaners = itProvider.second.get_cleaners();
-        for (const auto &itCleaner : cleaners) {
-            cout << "Cleaner : " << itCleaner.second->get_id()
-                 << " coord : " << itCleaner.second->get_coord().get_latitude()
-                 << " : " << itCleaner.second->get_coord().get_longitude()
-                 << " Debut : "
-                 << itCleaner.second->get_timestamp_start().to_string()
-                 << " Fin : "
-                 << itCleaner.second->get_timestamp_stop().to_string() << endl;
-        }
-    }
-
-    cout << "\n--------------TEST PRECISE POSITION--------------\n";
-    unit_tests_precise_position();
-    cout << "\n--------------TEST ANALYZE SENSOR--------------\n";
-    unit_tests_analyze_sensor();
     return 0;
 }
