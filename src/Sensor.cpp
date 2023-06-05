@@ -95,8 +95,8 @@ bool Sensor::analyze_sensor(const Date &start_date) {
     Date end_date = start_date;
     end_date.add_days(timeRange);
 
-    vector<Measurement> measures_sensor = Data::get_measures_of_sensor(
-        id, start_date, end_date, proche);
+    vector<Measurement> measures_sensor =
+        Data::get_measures_of_sensor(id, start_date, end_date, proche);
 
     if ((end_date) > today) {
         /*string toPrint = today.To_string();
@@ -112,8 +112,8 @@ bool Sensor::analyze_sensor(const Date &start_date) {
             }
         }
 
-        vector<double> mean_surroundings = calculate_mean_surroundings(
-            coord, start_date, end_date);
+        vector<double> mean_surroundings =
+            calculate_mean_surroundings(coord, start_date, end_date);
         vector<double> mean_sensor =
             calculate_mean(*this, start_date, end_date);
 

@@ -4,6 +4,7 @@
 class Vue {
 public:
     static void entree_int_safe(int &entree);
+    static void entree_double_safe(double &entree);
 
     static void print_menu();
 
@@ -14,6 +15,10 @@ public:
     static void print_error();
 
     static void afficher_donnees();
+
+    static void afficher_analyze_sensor();
+
+    static void afficher_stats_precise_position();
 
 protected:
     static bool quitter;

@@ -146,12 +146,19 @@ int main() {
             Vue::afficher_donnees();
             break;
 
+        case 4:
+            Vue::afficher_stats_precise_position();
+            break;
+
+        case 5:
+            Vue::afficher_analyze_sensor();
+            break;
+
         default:
             Vue::print_error();
             break;
         }
     }
-
 
     return 0;
 }
