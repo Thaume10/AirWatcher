@@ -34,16 +34,16 @@ vector<double> Sensor::calculate_mean(const Sensor &sensor,
     int count_PM10 = 0;
 
     for (auto &m : measures) {
-        if (m.get_attribute().get_id() == "O3") {
+        if (m.get_attribute_id() == "O3") {
             mean[0] += m.get_value();
             count_O3++;
-        } else if (m.get_attribute().get_id() == "NO2") {
+        } else if (m.get_attribute_id() == "NO2") {
             mean[1] += m.get_value();
             count_NO2++;
-        } else if (m.get_attribute().get_id() == "SO2") {
+        } else if (m.get_attribute_id() == "SO2") {
             mean[2] += m.get_value();
             count_SO2++;
-        } else if (m.get_attribute().get_id() == "PM10") {
+        } else if (m.get_attribute_id() == "PM10") {
             mean[3] += m.get_value();
             count_PM10++;
         }

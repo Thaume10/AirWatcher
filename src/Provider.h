@@ -18,7 +18,9 @@ public:
     friend bool operator<(const Provider &unProvider,
                           const Provider &autreProvider);
     std::string get_id() const { return id; }
-    std::unordered_map<std::string, Cleaner *> get_cleaners() const { return cleaners; }
+    std::unordered_map<std::string, Cleaner *> get_cleaners() const {
+        return cleaners;
+    }
 };
 bool operator<(const Provider &unProvider, const Provider &autreProvider);
 #endif

@@ -14,11 +14,15 @@ public:
 
     Date get_timestamp() const { return timestamp; }
 
-    Attribute &get_attribute() { return attibute; }
+    std::string get_attribute_id() const { return attribute_id; }
+
+    void set_attribute_id(const std::string &attr_id) {
+        attribute_id = attr_id;
+    }
 
 protected:
     double value;
     Date timestamp;
-    Attribute attibute;
+    std::string attribute_id;
 };
 #endif

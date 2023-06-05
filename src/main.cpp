@@ -124,13 +124,14 @@ int main() {
     Data::load_CSV();
 
     cout << "----------------USERS--------------" << endl;
-    for (const auto & user : Data::get_users()) {
+    for (const auto &user : Data::get_users()) {
         cout << "User : " << user.second.get_id() << endl;
         unordered_map<string, Sensor *> sensors = user.second.get_sensors();
         for (const auto &sensor : sensors) {
             cout << "\tSensor : " << sensor.second->get_id()
-                 << " coordonnees : " << sensor.second->get_coord().get_latitude()
-                 << " : " << sensor.second->get_coord().get_longitude() << endl;
+                 << " coordonnees : "
+                 << sensor.second->get_coord().get_latitude() << " : "
+                 << sensor.second->get_coord().get_longitude() << endl;
         }
     }
 
@@ -147,21 +148,19 @@ int main() {
     cout << "----------------CLEANERS--------------" << endl;
     for (const auto &cleaner : Data::get_cleaners()) {
         cout << "Cleaner : " << cleaner.second.get_id()
-             << " coord : " << cleaner.second.get_coord().get_latitude() << " : "
-             << cleaner.second.get_coord().get_longitude()
+             << " coord : " << cleaner.second.get_coord().get_latitude()
+             << " : " << cleaner.second.get_coord().get_longitude()
              << " Debut : " << cleaner.second.get_timestamp_start().to_string()
              << " Fin : " << cleaner.second.get_timestamp_stop().to_string()
              << endl;
     }
 
     cout << "----------------MEASUREMENTS--------------" << endl;
-    vector<Measurement> measurements = Data::get_measurements();
     /*
-    for (vector<Measurement>::iterator itMeasurements = measurements.begin();
-         itMeasurements != measurements.end(); ++itMeasurements) {
-        cout << "Measurement value : " << itMeasurements->get_value() << "
-        timestamp : " << itMeasurements->get_timestamp().to_string() << "
-        attribute : " << itMeasurements->get_attribute().get_id() << endl;
+    for (const auto &measure : Data::get_measurements()) {
+        cout << "Measurement value : " << measure.get_value() << " timestamp : "
+    << measure.get_timestamp().to_string() << " attribute : " <<
+    measure.get_attribute_id() << endl;
     }
     */
 
@@ -173,9 +172,10 @@ int main() {
             cout << "Cleaner : " << itCleaner.second->get_id()
                  << " coord : " << itCleaner.second->get_coord().get_latitude()
                  << " : " << itCleaner.second->get_coord().get_longitude()
-                 << " Debut : " << itCleaner.second->get_timestamp_start().to_string()
-                 << " Fin : " << itCleaner.second->get_timestamp_stop().to_string()
-                 << endl;
+                 << " Debut : "
+                 << itCleaner.second->get_timestamp_start().to_string()
+                 << " Fin : "
+                 << itCleaner.second->get_timestamp_stop().to_string() << endl;
         }
     }
 

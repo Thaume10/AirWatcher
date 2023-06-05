@@ -17,6 +17,7 @@ unordered_map<string, Sensor> Data::sensors;
 unordered_map<string, Cleaner> Data::cleaners;
 vector<Measurement> Data::measurements;
 unordered_map<string, Provider> Data::providers;
+unordered_map<string, Attribute> Data::attributes;
 
 Data::Data() {}
 
@@ -43,6 +44,25 @@ void Data::load_users_CSV() {
             user.add_sensor(itSensor->second);
             users[user_id] = user;
         }
+    }
+}
+
+void Data::load_attributes_CSV() {
+    // Users
+
+    ifstream fichier("data/attributes.csv");
+    string attribute_id;
+    string unit;
+    string description;
+
+    while (!fichier.eof()) {
+        getline(fichier, attribute_id, ';');
+        getline(fichier, unit, ';');
+        getline(fichier, description, ';');
+        fichier >> ws;
+
+        Attribute attribute(attribute_id, unit, description);
+        attributes[attribute_id] = attribute;
     }
 }
 
@@ -125,7 +145,7 @@ void Data::load_measurements_CSV() {
         Date date;
         date.string_to_time(datestr);
         Measurement m(val, date);
-        m.get_attribute().set_id(attribute_id);
+        m.set_attribute_id(attribute_id);
         measurements.push_back(m);
         sensors[sensorid].add_measurement(measurements.back());
     }
@@ -145,8 +165,7 @@ void Data::load_providers_CSV() {
 
         Provider provider(provider_id);
 
-        auto itCleaner =
-            cleaners.find(cleaner_id);
+        auto itCleaner = cleaners.find(cleaner_id);
 
         auto itProvider = providers.find(provider_id);
         if (itProvider != providers.end()) {
@@ -159,6 +178,7 @@ void Data::load_providers_CSV() {
 }
 
 void Data::load_CSV() {
+    load_attributes_CSV();
     load_sensors_CSV();
     load_cleaners_CSV();
     load_measurements_CSV();
@@ -188,15 +208,18 @@ vector<pair<Sensor, double>> Data::get_five_nearest_sensors(const GPS &coord) {
         if (top5.size() < 5) {
             if (!it.second.get_is_malfunctionning()) {
                 top5.push_back(
-                    make_pair(it.second, calculer_distance(coord, it.second.get_coord())));
+                    make_pair(it.second,
+                              calculer_distance(coord, it.second.get_coord())));
             }
         } else {
             sort(top5.begin(), top5.end(), comparer_par_double);
             if (!it.second.get_is_malfunctionning() &&
-                top5[0].second > calculer_distance(coord, it.second.get_coord())) {
+                top5[0].second >
+                    calculer_distance(coord, it.second.get_coord())) {
                 top5.erase(top5.begin());
                 top5.push_back(
-                    make_pair(it.second, calculer_distance(coord, it.second.get_coord())));
+                    make_pair(it.second,
+                              calculer_distance(coord, it.second.get_coord())));
             }
         }
     }
@@ -272,6 +295,6 @@ Sensor Data::get_sensor_by_id(const string &sensor_id) {
     auto it = sensors.find(sensor_id);
     if (it != sensors.end()) {
         return it->second;
-    } 
+    }
     return Sensor("");
 }

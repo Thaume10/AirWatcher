@@ -49,13 +49,13 @@ vector<double> Person::stats_precise_position(const GPS &position,
         double mPM10 = 0;
         for (auto it2 = it2Debut; it2 != it2Fin; ++it2) {
             // cout<<" es"<<it2->get_value()<<endl;
-            if (it2->get_attribute().get_id() == "O3") {
+            if (it2->get_attribute_id() == "O3") {
                 mO3 += it2->get_value();
-            } else if (it2->get_attribute().get_id() == "SO2") {
+            } else if (it2->get_attribute_id() == "SO2") {
                 mSO2 += it2->get_value();
-            } else if (it2->get_attribute().get_id() == "NO2") {
+            } else if (it2->get_attribute_id() == "NO2") {
                 mNO2 += it2->get_value();
-            } else if (it2->get_attribute().get_id() == "PM10") {
+            } else if (it2->get_attribute_id() == "PM10") {
                 mPM10 += it2->get_value();
             } else {
                 cout << "err Stats_precise_position" << endl;
@@ -73,13 +73,12 @@ vector<double> Person::stats_precise_position(const GPS &position,
         cout << ", distance: " << it->second << endl;
         if (it->second == 0) {
             return {mO3, mSO2, mNO2, mPM10};
-        } else {
-            mfO3 += mO3 / (it->second);
-            mfSO2 += mSO2 / (it->second);
-            mfNO2 += mNO2 / (it->second);
-            mfPM10 += mPM10 / (it->second);
-            sumD += 1 / (it->second);
         }
+        mfO3 += mO3 / (it->second);
+        mfSO2 += mSO2 / (it->second);
+        mfNO2 += mNO2 / (it->second);
+        mfPM10 += mPM10 / (it->second);
+        sumD += 1 / (it->second);
     }
     // cout<<"MFO3 "<<mfO3<<endl;
     mfO3 = mfO3 / sumD;

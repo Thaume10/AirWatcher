@@ -71,6 +71,8 @@ protected:
 
     static void load_users_CSV();
 
+    static void load_attributes_CSV();
+
     static void load_sensors_CSV();
 
     static void load_cleaners_CSV();

@@ -1,9 +1,9 @@
 #if !defined(SENSOR_H)
 #define SENSOR_H
 
-#include "Measurement.h"
 #include "Date.h"
 #include "Device.h"
+#include "Measurement.h"
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -35,7 +35,7 @@ public:
 
     bool analyzeSensor(const Sensor &sensor, const Date &start_date);
 
-    std::vector<Measurement> get_measurements() const { return measurements;}
+    std::vector<Measurement> get_measurements() const { return measurements; }
 
 protected:
     bool is_malfunctionning;
