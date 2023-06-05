@@ -85,7 +85,7 @@ vector<double> Sensor::calculate_mean_surroundings(const GPS &coord,
     return mean;
 }
 
-bool Sensor::analyzeSensor(const Sensor &sensor, const Date &start_date) {
+bool Sensor::analyze_sensor(const Date &start_date) {
     bool reliable = true;
     int timeRange = 30; // days
     Date proche;
@@ -96,7 +96,7 @@ bool Sensor::analyzeSensor(const Sensor &sensor, const Date &start_date) {
     end_date.add_days(timeRange);
 
     vector<Measurement> measures_sensor = Data::get_measures_of_sensor(
-        sensor.get_id(), start_date, end_date, proche);
+        id, start_date, end_date, proche);
 
     if ((end_date) > today) {
         /*string toPrint = today.To_string();
@@ -113,9 +113,9 @@ bool Sensor::analyzeSensor(const Sensor &sensor, const Date &start_date) {
         }
 
         vector<double> mean_surroundings = calculate_mean_surroundings(
-            sensor.get_coord(), start_date, end_date);
+            coord, start_date, end_date);
         vector<double> mean_sensor =
-            calculate_mean(sensor, start_date, end_date);
+            calculate_mean(*this, start_date, end_date);
 
         double deltaOfReliability = 10;
         for (int c = 0; c < 4; c++) {

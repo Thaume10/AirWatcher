@@ -96,7 +96,7 @@ void unit_tests_analyze_sensor() {
     // Test : Le capteur doit être fiable si toutes les mesures sont positives
     // et que la moyenne ne diffère pas de plus de deltaOfReliability
     cout << "\nTest si OK dans des conditionns normales" << endl;
-    if (sensor1.analyzeSensor(sensor1, start_date)) {
+    if (sensor1.analyze_sensor(start_date)) {
         cout << "\n---- Test validé ----\n" << endl;
     }
 
@@ -106,7 +106,7 @@ void unit_tests_analyze_sensor() {
          << endl;
     Sensor sensor2("Sensor36");
 
-    if (!sensor2.analyzeSensor(sensor2, start_date)) {
+    if (!sensor2.analyze_sensor(start_date)) {
         cout << "\n---- Test validé ----\n" << endl;
     }
 
@@ -115,7 +115,7 @@ void unit_tests_analyze_sensor() {
     cout << "\nTest si NOK dans le cas où le delta est depassé" << endl;
     Sensor sensor3("Sensor0");
 
-    if (!sensor3.analyzeSensor(sensor3, start_date)) {
+    if (!sensor3.analyze_sensor(start_date)) {
         cout << "\n---- Test validé ----\n" << endl;
     }
 }
@@ -151,6 +151,7 @@ int main() {
             break;
         }
     }
+
 
     return 0;
 }

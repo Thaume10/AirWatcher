@@ -33,7 +33,7 @@ public:
 
     friend bool operator<(const Sensor &unSensor, const Sensor &autreSensor);
 
-    bool analyzeSensor(const Sensor &sensor, const Date &start_date);
+    bool analyze_sensor(const Date &start_date);
 
     std::vector<Measurement> get_measurements() const { return measurements; }
 
